@@ -12,6 +12,7 @@ body {
     width: 300px;
     margin: 10px 50px 15px 50px;
     text-align: right;
+    font-family: sans-serif;
 }
 
 #calcButtons {
@@ -23,6 +24,16 @@ body {
 	margin: 5px 10px 5px 0;
     font-size: 50px;
     font-weight: bold;
+}
+
+#dispValue2 {
+    line-height: 1.25;
+    min-height: 1.25em;
+    margin: 0;
+    padding: 5px 0 2px 8px;
+    text-align: left;
+    background-color: #00bfff;
+    color: #fff;
 }
 
 .calcButton {
