@@ -44,6 +44,10 @@ body {
 	background-color: #a9a9a9;
 }
 
+.calcButton:active, .calcButton:focus {
+	outline: 0;
+}
+
 .endButton {
     margin-right: 0;
 }
