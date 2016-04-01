@@ -72,10 +72,21 @@ function main() {
     
     //Clears primary display when C is clicked
     function CClick () {
-        secondaryDispVal = secondaryDispVal.substring(0, secondaryDispVal.length-primaryDispVal.length)
+        secondaryDispVal = secondaryDispVal.substring(0, secondaryDispVal.length-primaryDispVal.length);
         primaryDispVal = "0";
         updateDisplay();
     }
+    
+    // Negative sign converts number
+    function posnegClick () {
+        secondaryDispVal = secondaryDispVal.substring(0, secondaryDispVal.length-primaryDispVal.length);
+        primaryDispVal = parseFloat(primaryDispVal);
+        primaryDispVal *= -1;
+        primaryDispVal = primaryDispVal.toString();
+        secondaryDispVal += primaryDispVal;
+        updateDisplay();
+    }
+    
     
     //Initial Dom Update
     dispValue.innerHTML = calcObject.primaryDisplay;
@@ -88,8 +99,9 @@ function main() {
             calcButtons[i].addEventListener("click", delClick);
         } else if (calcButtons[i].innerHTML == "C") {
             calcButtons[i].addEventListener("click", CClick);
-        }
-        else {
+        } else if (calcButtons[i].innerHTML == "+/-") {
+            calcButtons[i].addEventListener("click", posnegClick);
+        } else {
             calcButtons[i].addEventListener("click", buttonClick);
         }
     }
