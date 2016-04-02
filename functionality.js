@@ -46,7 +46,7 @@ function main() {
             secondaryDispVal += " " + hold + " ";
         } else if (hold == "=") {
             // Calculate answers here
-            
+            primaryDispVal = +eval(secondaryDispVal).toFixed(5);
             secondaryDispVal += " =";
         } else {
             secondaryDispVal += hold;
