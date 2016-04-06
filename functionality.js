@@ -1,7 +1,7 @@
 /* Main Function- will load javascript in head when window
  * is fully loaded.
  */
-function mainBasicCalc() {
+function calcFunctionality() {
     //Variables
     var dispValue = document.getElementById("dispValue"),      
         dispValue2 = document.getElementById("dispValue2"), secondaryDispVal = "", primaryDispVal = "", calcButtons = document.getElementsByClassName("calcButton"), i;
@@ -108,4 +108,48 @@ function mainBasicCalc() {
 }
 
 
-window.onload = mainBasicCalc;
+// Function for factorisation functionality
+function factorFunctionality() {
+    
+}
+
+
+// Function for menu buttons to hide and display divs
+function menuFunctionality() {
+    var allWidgets = document.getElementsByClassName("widgetDiv");
+    var basicCalc = document.getElementById("basicCalc");
+    var factorsCalc = document.getElementById("factorsCalc");
+    
+    // Hides all the Divs except for the menu and wrapper
+    function hideAll() {
+        for (var i = 0; i < allWidgets.length; i++) {
+            allWidgets[i].style.display = "none";
+        }
+    }
+    
+    // Functions to show each div
+    function showBasicCalc() {
+        hideAll();
+        basicCalc.style.display = "block";
+    }
+    
+    function showFactorsCalc() {
+        hideAll();
+        factorsCalc.style.display = "block";
+    }
+    
+    // Attach functions to buttons
+    document.getElementById("menuCalc").addEventListener("click", showBasicCalc);
+    document.getElementById("menuFactors").addEventListener("click", showFactorsCalc);
+
+}
+
+// Main function to load all other functions onload
+function main() {
+    calcFunctionality();
+    menuFunctionality();
+    factorFunctionality();
+}
+
+// Call main onload
+window.onload = main;
