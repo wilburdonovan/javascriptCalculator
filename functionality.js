@@ -1,7 +1,7 @@
 /* Main Function- will load javascript in head when window
  * is fully loaded.
  */
-function main() {
+function mainBasicCalc() {
     //Variables
     var dispValue = document.getElementById("dispValue"),      
         dispValue2 = document.getElementById("dispValue2"), secondaryDispVal = "", primaryDispVal = "", calcButtons = document.getElementsByClassName("calcButton"), i;
@@ -108,4 +108,4 @@ function main() {
 }
 
 
-window.onload = main;
+window.onload = mainBasicCalc;
