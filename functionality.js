@@ -1,6 +1,4 @@
-/* Main Function- will load javascript in head when window
- * is fully loaded.
- */
+// FUNCTIONALITY FOR CALCULATOR
 function calcFunctionality() {
     //Variables
     var dispValue = document.getElementById("dispValue"),      
@@ -108,13 +106,61 @@ function calcFunctionality() {
 }
 
 
-// Function for factorisation functionality
+// FUNCTIONALITY FOR FACTORS WIDGET
 function factorFunctionality() {
+    var factorInputButton = document.getElementById("factorInputButton");
+    var factorResetButton = document.getElementById("factorResetButton");
+    var factorInput = document.getElementById("factorInput");
+    var factorOutput = document.getElementById("factorOutput");
+    var inputArray = [];
+    var outputString = "";
+    var temp = 0;
     
+    // Function that will calculate the actual factor
+    function getFactors() {
+        temp = parseInt(factorInput.value);
+        inputArray.push(temp);
+        
+        for (var i = 0; i < inputArray.length; i++) {
+            outputString += "- The factors for " + inputArray[i] + " are: ";
+            for (var j = 1; j < inputArray[i]; j++) {
+                if (inputArray[i] % j == 0) {
+                    outputString += " " + j + " ";
+                }
+            }
+            outputString += "and " + inputArray[i] +"<br><br>";
+            factorOutput.innerHTML = outputString;
+        }
+    }
+    
+    // Function that resets the utility
+    function resetFactors() {
+        inputArray = [];
+        outputString = "";
+        factorOutput.innerHTML = outputString;
+    }
+    
+    /* 
+     * When the "Add" button is clicked:
+     * Clear ouputString
+     * Prevent button sending data to server
+     * Run getFactors function
+     */
+    factorInputButton.addEventListener("click", function(event) {
+        outputString = "";
+        event.preventDefault();
+        getFactors();
+    });
+    
+    // Resets utility when Reset button is clicked
+    factorResetButton.addEventListener("click", function(event) {
+        event.preventDefault();
+        resetFactors();
+    });
 }
 
 
-// Function for menu buttons to hide and display divs
+// FUNCTIONALITY FOR MENU BAR
 function menuFunctionality() {
     var allWidgets = document.getElementsByClassName("widgetDiv");
     var basicCalc = document.getElementById("basicCalc");
@@ -144,7 +190,8 @@ function menuFunctionality() {
 
 }
 
-// Main function to load all other functions onload
+
+// FUNCTION CALLS ALL OTHER FUNCTION TO BE PARSED WHEN WINDOW IS LOADED
 function main() {
     calcFunctionality();
     menuFunctionality();

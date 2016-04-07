@@ -51,11 +51,11 @@ body {
     border-radius: 8px;
 }
 
-.calcButton:hover, .menuButton:hover {
+.calcButton:hover, .menuButton:hover, .factorButton:hover {
 	background-color: #a9a9a9;
 }
 
-.calcButton:active, .calcButton:focus, .menuButton:active, .menuButton:focus {
+.calcButton:active, .calcButton:focus, .menuButton:active, .menuButton:focus, .factorButton:active, .factorButton:focus, #factorInput:active {
 	outline: 0;
 }
 
@@ -85,4 +85,36 @@ body {
 
 #factorsCalc {
 	display: none;
+    padding: 20px;
+    text-align: center;
 }
+
+.factorButton {
+	font-size: 20px;
+    margin-top: 15px;
+    font-family: sans-serif;
+    color: #fff;
+    background-color: #00bfff;
+    border-radius: 8px;
+    border: 0px;
+}
+
+#factorInput {
+    background-color: #a9a9a9;
+    color: #fff;
+    text-align: right;
+    padding: 5px 10px;
+    outline: 0;
+    font-size: 20px;
+    border: 0px;
+}
+
+#factorsCalc:first-child {
+	text-align: justify;
+}
+
+#factorOutput {
+	text-align: left;
+}
+
+
