@@ -2,7 +2,7 @@
 function calcFunctionality() {
     //Variables
     var dispValue = document.getElementById("dispValue"),      
-        dispValue2 = document.getElementById("dispValue2"), secondaryDispVal = "", primaryDispVal = "", calcButtons = document.getElementsByClassName("calcButton"), i;
+        dispValue2 = document.getElementById("dispValue2"), secondaryDispVal = "", primaryDispVal = "", calcButtons = document.getElementsByClassName("calcButton"), i, prevKey;
 
     //Basic calculator object
     var calcObject = {
@@ -28,10 +28,24 @@ function calcFunctionality() {
         dispValue.innerHTML = calcObject.primaryDisplay;
         dispValue2.innerHTML = calcObject.secondaryDisplay;
     }
+    
+     //Clears screen when CE is clicked
+    function CEClick() {
+        secondaryDispVal = "";
+        primaryDispVal = "0";
+        calcObject.updateDisplay("0", " ");
+        updateDisplay();
+    }
    
     //Adds the buttons value to the dispValue strings and updates display
     function buttonClick() {
         var hold = this.innerHTML;
+        
+        //If the previous key pressed was "=", reset calc
+        if (prevKey == "=") {
+            CEClick();
+        }
+        
         if (hold == "0" || hold == "1" || hold == "2" || hold == "3" || hold == "4" || hold == "5" || hold == "6" || hold == "7" || hold == "8" || hold == "9" || hold == ".") {
             if (primaryDispVal != "0") {
                 primaryDispVal += hold;
@@ -50,30 +64,38 @@ function calcFunctionality() {
             secondaryDispVal += hold;
         }
         
+        prevKey = hold;
+        
         updateDisplay();
     }
     
-    //Clears screen when CE is clicked
-    function CEClick() {
-        secondaryDispVal = "";
-        primaryDispVal = "0";
-        calcObject.updateDisplay("0", " ");
-        updateDisplay();
-    }
-    
-    //Deletes last character in display
-    function delClick() {
-        primaryDispVal = primaryDispVal.substring(0, primaryDispVal.length-1);
-        secondaryDispVal = secondaryDispVal.substring(0, secondaryDispVal.length-1);
-        updateDisplay();
-    }
-    
+   
     //Clears primary display when C is clicked
     function CClick () {
         secondaryDispVal = secondaryDispVal.substring(0, secondaryDispVal.length-primaryDispVal.length);
         primaryDispVal = "0";
         updateDisplay();
     }
+    
+    
+    /* 
+     * If the length of the primaryDispVal is 1, 
+     * primaryDispVal becomes 0, the last character
+     * in secondaryDispVal is removed.
+     * Else, remove the
+     * last character from both displays
+     */
+    function delClick() {
+        if (primaryDispVal.length == 1) {
+            CClick();
+        } else {
+            primaryDispVal = primaryDispVal.substring(0, primaryDispVal.length-1);
+            secondaryDispVal = secondaryDispVal.substring(0, secondaryDispVal.length-1);
+            updateDisplay();
+        }
+    }
+    
+ 
     
     // Negative sign converts number
     function posnegClick () {
@@ -191,7 +213,7 @@ function menuFunctionality() {
 }
 
 
-// FUNCTION CALLS ALL OTHER FUNCTION TO BE PARSED WHEN WINDOW IS LOADED
+// FUNCTION CALLS ALL OTHER FUNCTIONs TO BE PARSED WHEN WINDOW IS LOADED
 function main() {
     calcFunctionality();
     menuFunctionality();
