@@ -182,25 +182,53 @@ function factorFunctionality() {
 
 
 // FUNCTIONALITY FOR NUMBER BASE CONVERSIONS
-// Converts only up to a million
-function toBinary(temp) {
-    var num = temp;
-    var remainder = temp;
-    var toBinaryArray = [];
-    var cache;
-    for (i = 20; i >= 0; i--) {
-        cache = Math.pow(2, i);
-        if (num / cache >= 1) {
-           if (remainder >= cache) {
-               toBinaryArray.push(1);
-               remainder -= cache;
-           } else {
-               toBinaryArray.push(0);
-           }
-        } 
+// Converts only up to a decimal value of 1,000,000
+function baseConversionFunctionality() {
+    var inputSelectorButtons = document.querySelectorAll("#inputBaseOption button");
+    var outputSelectorButtons = document.querySelectorAll("#outputBaseOption button");
+    var i;
+    
+    //This function removes the "selected" class from 
+    //   all buttons of a input array
+    function removeSelectedClass(inputArr) {
+        for (i = 0; i < inputArr.length; i++) {
+            inputArr[i].classList.remove("selected");
+        }
     }
     
-    console.log(toBinaryArray.join(""));
+     //Attach eventListeners to a button thats clicked
+    function attachEventListeners(inputArr) {
+       for (i = 0; i < inputArr.length; i++) {
+            inputArr[i].addEventListener("click", function(event) {
+                removeSelectedClass(inputArr);
+                this.classList.add("selected");
+            });
+        }
+    }
+    
+    attachEventListeners(inputSelectorButtons);
+    attachEventListeners(outputSelectorButtons);
+    
+    
+    //function that converts decimal numbers to binary
+    function decimalToBinary() {
+        var num = temp;
+        var remainder = temp;
+        var toBinaryArray = [];
+        var cache;
+        for (i = 20; i >= 0; i--) {
+            cache = Math.pow(2, i);
+            if (num / cache >= 1) {
+               if (remainder >= cache) {
+                   toBinaryArray.push(1);
+                   remainder -= cache;
+               } else {
+                   toBinaryArray.push(0);
+               }
+            } 
+        }
+        console.log(toBinaryArray.join(""));
+    }
 }
 
 
@@ -248,6 +276,7 @@ function main() {
     calcFunctionality();
     menuFunctionality();
     factorFunctionality();
+    baseConversionFunctionality();
 }
 
 // Call main onload

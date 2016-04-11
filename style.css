@@ -119,4 +119,61 @@ body {
 	text-align: left;
 }
 
+.noBullets {
+    list-style-type: none;
+}
 
+.smallHeading {
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: underline;
+}
+
+.baseConversionButton {
+	font-size: 15px;
+    border-radius: 0px;
+    margin-bottom: 5px;
+    width: 100px;
+}
+
+#baseConversionCalc {
+	text-align: center;
+}
+
+.floatleft {
+    float: left;
+    clear: both;
+}
+
+.floatRight {
+    float: right;
+}
+
+.blackBackground {
+    background-color: #000;
+}
+
+.noPadding {
+    padding: 0px;
+}
+
+.inlineBlock {
+    display: inline-block;
+    clear: both;
+}
+
+#outputBaseOption {
+	margin-right: 20px;
+}
+
+.widgetHeader {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.selected {
+    background-color: #009ddd;
+    color: #000;
+}

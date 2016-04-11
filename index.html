@@ -62,6 +62,7 @@
             </div>
         </div>
         <div id="factorsCalc" class="widgetDiv notCalcDiv">
+            <header class="widgetHeader"> Factors Calculator</header>
             <p class="justifyPara"> What number would you like factors for? Please enter each number at a time followed by pressing the "add" button.</p>
             <form>
                 <input type="text" id="factorInput" class="inputBox"><br>
@@ -71,9 +72,23 @@
             <p id="factorOutput"></p>
         </div>
         <div id="baseConversionCalc" class="widgetDiv notCalcDiv">
+            <header class="widgetHeader"> Base Conversion</header>
             <p class="justifyPara"> This widget takes numbers from a common base and converts them to a number in a different base. Common bases are binary, octal, decimal and hexadecimal. </p>
-            
-            
+            <input type="text" id="baseConversionInput" class="inputBox">
+            <ul class="noBullets floatLeft noPadding inlineBlock" id="inputBaseOption"> 
+                <dl class="smallHeading inlineBlock"> Input Base </dl>
+                <li><button class="BUTTON baseConversionButton"> Decimal </button></li>
+                <li><button class="BUTTON baseConversionButton"> Binary </button></li>
+                <li><button class="BUTTON baseConversionButton"> Octal </button></li>
+                <li><button class="BUTTON baseConversionButton"> HexaDecimal </button></li>
+            </ul>
+            <ul class="noBullets floatRight noPadding inlineBlock" id="outputBaseOption"> 
+                <dl class="smallHeading inlineBlock"> Output Base </dl>
+                <li><button class="BUTTON baseConversionButton"> Decimal </button></li>
+                <li><button class="BUTTON baseConversionButton"> Binary </button></li>
+                <li><button class="BUTTON baseConversionButton"> Octal </button></li>
+                <li><button class="BUTTON baseConversionButton"> HexaDecimal </button></li>
+            </ul>
         </div>
     </div>
 </body>
