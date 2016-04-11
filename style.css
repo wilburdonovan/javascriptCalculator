@@ -7,7 +7,17 @@ body {
     text-align: center;
 }
 
-#display, #calcButtons, #factorsCalc {
+.notCalcDiv {
+	display: none;
+    padding: 20px;
+    text-align: right;
+    border: #00bfff 2px solid;
+    width: 300px;
+    margin: 10px 50px 15px 150px;
+    font-family: sans-serif;
+}
+
+#display, #calcButtons {
     border: #00bfff 2px solid;
     width: 300px;
     margin: 10px 50px 15px 150px;
@@ -37,25 +47,32 @@ body {
 }
 
 .calcButton, .menuButton {
-	border: 0px;
     padding: 0;
     margin: 0 8px 8px 0;
     width: 69px;
     text-align: center;
     float: left;
+    font-weight: bold;
+}
+
+.factorButton {
+    margin-top: 15px; 
+}
+
+.BUTTON {
     font-size: 20px;
     font-family: sans-serif;
     color: #fff;
     background-color: #00bfff;
-    font-weight: bold;
     border-radius: 8px;
+    border: 0px;
 }
 
-.calcButton:hover, .menuButton:hover, .factorButton:hover {
+.BUTTON:hover {
 	background-color: #a9a9a9;
 }
 
-.calcButton:active, .calcButton:focus, .menuButton:active, .menuButton:focus, .factorButton:active, .factorButton:focus, #factorInput:active {
+#factorInput:active, .BUTTON:focus, .BUTTON:active {
 	outline: 0;
 }
 
@@ -83,23 +100,7 @@ body {
     padding: 5px;
 }
 
-#factorsCalc {
-	display: none;
-    padding: 20px;
-    text-align: center;
-}
-
-.factorButton {
-	font-size: 20px;
-    margin-top: 15px;
-    font-family: sans-serif;
-    color: #fff;
-    background-color: #00bfff;
-    border-radius: 8px;
-    border: 0px;
-}
-
-#factorInput {
+.inputBox {
     background-color: #a9a9a9;
     color: #fff;
     text-align: right;
@@ -107,10 +108,11 @@ body {
     outline: 0;
     font-size: 20px;
     border: 0px;
+    margin-bottom: 15px;
 }
 
-#factorsCalc:first-child {
-	text-align: justify;
+.justifyPara {
+    text-align: justify;
 }
 
 #factorOutput {

@@ -30,7 +30,7 @@ function calcFunctionality() {
     }
     
      //Clears screen when CE is clicked
-    function CEClick() {
+    function CClick() {
         secondaryDispVal = "";
         primaryDispVal = "0";
         calcObject.updateDisplay("0", " ");
@@ -43,7 +43,7 @@ function calcFunctionality() {
         
         //If the previous key pressed was "=", reset calc
         if (prevKey == "=") {
-            CEClick();
+            CClick();
         }
         
         if (hold == "0" || hold == "1" || hold == "2" || hold == "3" || hold == "4" || hold == "5" || hold == "6" || hold == "7" || hold == "8" || hold == "9" || hold == ".") {
@@ -71,7 +71,7 @@ function calcFunctionality() {
     
    
     //Clears primary display when C is clicked
-    function CClick () {
+    function CEClick () {
         secondaryDispVal = secondaryDispVal.substring(0, secondaryDispVal.length-primaryDispVal.length);
         primaryDispVal = "0";
         updateDisplay();
@@ -87,7 +87,7 @@ function calcFunctionality() {
      */
     function delClick() {
         if (primaryDispVal.length == 1) {
-            CClick();
+            CEClick();
         } else {
             primaryDispVal = primaryDispVal.substring(0, primaryDispVal.length-1);
             secondaryDispVal = secondaryDispVal.substring(0, secondaryDispVal.length-1);
@@ -96,7 +96,6 @@ function calcFunctionality() {
     }
     
  
-    
     // Negative sign converts number
     function posnegClick () {
         secondaryDispVal = secondaryDispVal.substring(0, secondaryDispVal.length-primaryDispVal.length);
@@ -182,12 +181,36 @@ function factorFunctionality() {
 }
 
 
+// FUNCTIONALITY FOR NUMBER BASE CONVERSIONS
+// Converts only up to a million
+function toBinary(temp) {
+    var num = temp;
+    var remainder = temp;
+    var toBinaryArray = [];
+    var cache;
+    for (i = 20; i >= 0; i--) {
+        cache = Math.pow(2, i);
+        if (num / cache >= 1) {
+           if (remainder >= cache) {
+               toBinaryArray.push(1);
+               remainder -= cache;
+           } else {
+               toBinaryArray.push(0);
+           }
+        } 
+    }
+    
+    console.log(toBinaryArray.join(""));
+}
+
+
 // FUNCTIONALITY FOR MENU BAR
 function menuFunctionality() {
     var allWidgets = document.getElementsByClassName("widgetDiv");
     var basicCalc = document.getElementById("basicCalc");
     var factorsCalc = document.getElementById("factorsCalc");
-    
+    var baseConversionCalc = document.getElementById("baseConversionCalc");
+        
     // Hides all the Divs except for the menu and wrapper
     function hideAll() {
         for (var i = 0; i < allWidgets.length; i++) {
@@ -206,10 +229,17 @@ function menuFunctionality() {
         factorsCalc.style.display = "block";
     }
     
+    function showBaseConversionCalc() {
+        hideAll();
+        baseConversionCalc.style.display = "block";
+    }
+    
     // Attach functions to buttons
     document.getElementById("menuCalc").addEventListener("click", showBasicCalc);
     document.getElementById("menuFactors").addEventListener("click", showFactorsCalc);
 
+document.getElementById("menuBaseConversion").addEventListener("click", showBaseConversionCalc);    
+    
 }
 
 

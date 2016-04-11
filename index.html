@@ -13,8 +13,9 @@
     <div id="wrapper" class="clearFix">
         
         <div id="menu">
-            <button class="menuButton" id="menuCalc"> Basic Calculator</button>
-            <button class="menuButton" id="menuFactors"> Factors </button>
+            <button class="menuButton BUTTON" id="menuCalc"> Basic Calculator</button>
+            <button class="menuButton BUTTON" id="menuFactors"> Factors </button>
+            <button class="menuButton BUTTON" id="menuBaseConversion"> Base Conversion </button>
         </div>
         <div id="basicCalc" class="widgetDiv">
              <!-- The "screen" of the calculator" -->   
@@ -29,45 +30,50 @@
             <!-- Put the buttons of the calculator-->
             <div id="calcButtons">
                 <div>
-                    <button class="calcButton">CE</button>
-                    <button class="calcButton">C</button>
-                    <button class="calcButton">Del</button>
-                    <button class="calcButton endButton">/</button>
+                    <button class="calcButton BUTTON">CE</button>
+                    <button class="calcButton BUTTON">C</button>
+                    <button class="calcButton BUTTON">Del</button>
+                    <button class="calcButton BUTTON endButton">/</button>
                 </div>
                 <div>
-                    <button class="calcButton">7</button>
-                    <button class="calcButton">8</button>
-                    <button class="calcButton">9</button>
-                    <button class="calcButton endButton">*</button>
+                    <button class="calcButton BUTTON">7</button>
+                    <button class="calcButton BUTTON">8</button>
+                    <button class="calcButton BUTTON">9</button>
+                    <button class="calcButton BUTTON endButton">*</button>
                 </div>
                 <div class="rowWrapper">
-                    <button class="calcButton">4</button>
-                    <button class="calcButton">5</button>
-                    <button class="calcButton">6</button>
-                    <button class="calcButton endButton">-</button>
+                    <button class="calcButton BUTTON">4</button>
+                    <button class="calcButton BUTTON">5</button>
+                    <button class="calcButton BUTTON">6</button>
+                    <button class="calcButton BUTTON endButton">-</button>
                 </div>
                 <div>
-                    <button class="calcButton">1</button>
-                    <button class="calcButton">2</button>
-                    <button class="calcButton">3</button>
-                    <button class="calcButton endButton">+</button>
+                    <button class="calcButton BUTTON">1</button>
+                    <button class="calcButton BUTTON">2</button>
+                    <button class="calcButton BUTTON">3</button>
+                    <button class="calcButton BUTTON endButton">+</button>
                 </div>
                 <div>
-                    <button class="calcButton">+/-</button>
-                    <button class="calcButton">0</button>
-                    <button class="calcButton">.</button>
-                    <button class="calcButton endButton">=</button>
+                    <button class="calcButton BUTTON">+/-</button>
+                    <button class="calcButton BUTTON">0</button>
+                    <button class="calcButton BUTTON">.</button>
+                    <button class="calcButton BUTTON endButton">=</button>
                 </div>
             </div>
         </div>
-        <div id="factorsCalc" class="widgetDiv">
-            <p> What number would you like factors for? Please enter each number at a time followed by pressing the "add" button.</p>
+        <div id="factorsCalc" class="widgetDiv notCalcDiv">
+            <p class="justifyPara"> What number would you like factors for? Please enter each number at a time followed by pressing the "add" button.</p>
             <form>
-                <input type="text" id="factorInput"><br>
-                <button class="factorButton" id="factorInputButton"> Add </button>
-                <button class="factorButton" id="factorResetButton"> Reset </button>
+                <input type="text" id="factorInput" class="inputBox"><br>
+                <button class="factorButton BUTTON" id="factorInputButton"> Add </button>
+                <button class="factorButton BUTTON" id="factorResetButton"> Reset </button>
             </form>
             <p id="factorOutput"></p>
+        </div>
+        <div id="baseConversionCalc" class="widgetDiv notCalcDiv">
+            <p class="justifyPara"> This widget takes numbers from a common base and converts them to a number in a different base. Common bases are binary, octal, decimal and hexadecimal. </p>
+            
+            
         </div>
     </div>
 </body>
