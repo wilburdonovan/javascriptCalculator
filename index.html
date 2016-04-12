@@ -11,12 +11,13 @@
 </head>
 <body>
     <div id="wrapper" class="clearFix">
-        
+        <!-- MENU -->
         <div id="menu">
             <button class="menuButton BUTTON" id="menuCalc"> Basic Calculator</button>
             <button class="menuButton BUTTON" id="menuFactors"> Factors </button>
             <button class="menuButton BUTTON" id="menuBaseConversion"> Base Conversion </button>
         </div>
+        <!-- CALCULATOR DIV -->
         <div id="basicCalc" class="widgetDiv">
              <!-- The "screen" of the calculator" -->   
             <div id="display">
@@ -61,6 +62,7 @@
                 </div>
             </div>
         </div>
+        <!-- FACTOR DIV -->
         <div id="factorsCalc" class="widgetDiv notCalcDiv">
             <header class="widgetHeader"> Factors Calculator</header>
             <p class="justifyPara"> What number would you like factors for? Please enter each number at a time followed by pressing the "add" button.</p>
@@ -71,26 +73,28 @@
             </form>
             <p id="factorOutput"></p>
         </div>
+        <!-- BASE CONVERSION DIV -->
         <div id="baseConversionCalc" class="widgetDiv notCalcDiv">
             <header class="widgetHeader"> Base Conversion</header>
             <p class="justifyPara"> This widget takes numbers from a common base and converts them to a number in a different base. Common bases are binary, octal, decimal and hexadecimal. </p>
             <input type="text" id="baseConversionInput" class="inputBox">
+            <button class="BUTTON" id="baseConversionConvert"> Convert </button><br>
             <ul class="noBullets floatLeft noPadding inlineBlock" id="inputBaseOption"> 
                 <dl class="smallHeading inlineBlock"> Input Base </dl>
-                <li><button class="BUTTON baseConversionButton"> Decimal </button></li>
-                <li><button class="BUTTON baseConversionButton"> Binary </button></li>
-                <li><button class="BUTTON baseConversionButton"> Octal </button></li>
-                <li><button class="BUTTON baseConversionButton"> HexaDecimal </button></li>
+                <li><button class="BUTTON baseConversionButton">Decimal</button></li>
+                <li><button class="BUTTON baseConversionButton">Binary</button></li>
+                <li><button class="BUTTON baseConversionButton">Octal</button></li>
+                <li><button class="BUTTON baseConversionButton">HexaDecimal</button></li>
             </ul>
             <ul class="noBullets floatRight noPadding inlineBlock" id="outputBaseOption"> 
                 <dl class="smallHeading inlineBlock"> Output Base </dl>
-                <li><button class="BUTTON baseConversionButton"> Decimal </button></li>
-                <li><button class="BUTTON baseConversionButton"> Binary </button></li>
-                <li><button class="BUTTON baseConversionButton"> Octal </button></li>
-                <li><button class="BUTTON baseConversionButton"> HexaDecimal </button></li>
+                <li><button class="BUTTON baseConversionButton">Decimal</button></li>
+                <li><button class="BUTTON baseConversionButton">Binary</button></li>
+                <li><button class="BUTTON baseConversionButton">Octal</button></li>
+                <li><button class="BUTTON baseConversionButton">HexaDecimal</button></li>
             </ul>
+            <p id="baseConversionOutput"></p>
         </div>
     </div>
 </body>
-
 </html>

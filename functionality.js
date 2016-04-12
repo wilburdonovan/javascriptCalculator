@@ -1,4 +1,31 @@
-// FUNCTIONALITY FOR CALCULATOR
+/* =================================================================
+                GLOBAL/ RECYCLABLE FUNCTIONS
+   ===============================================================*/
+
+/* This function removes the "selected" class from 
+       all buttons of a input array */
+    function removeSelectedClass(inputArr) {
+        for (i = 0; i < inputArr.length; i++) {
+            inputArr[i].classList.remove("selected");
+        }
+    }
+    
+    /* Attach eventListeners to a button thats clicked from
+     * an input array and adds "selected" class to 
+     * the button that was clicked */
+    function addSelectedClassWithEventListeners(inputArr) {
+       for (i = 0; i < inputArr.length; i++) {
+            inputArr[i].addEventListener("click", function(event) {
+                removeSelectedClass(inputArr);
+                this.classList.add("selected");
+            });
+        }
+    }
+
+
+/* =================================================================
+                FUNCTIONALITY FOR BASIC CALCULATOR
+   ===============================================================*/
 function calcFunctionality() {
     //Variables
     var dispValue = document.getElementById("dispValue"),      
@@ -124,11 +151,14 @@ function calcFunctionality() {
             calcButtons[i].addEventListener("click", buttonClick);
         }
     }
-}
+} //End basic calculator functionality
 
 
-// FUNCTIONALITY FOR FACTORS WIDGET
+/* =================================================================
+                FUNCTIONALITY FOR FACTORS WIDGET
+   ===============================================================*/
 function factorFunctionality() {
+    // Functions variables
     var factorInputButton = document.getElementById("factorInputButton");
     var factorResetButton = document.getElementById("factorResetButton");
     var factorInput = document.getElementById("factorInput");
@@ -178,66 +208,117 @@ function factorFunctionality() {
         event.preventDefault();
         resetFactors();
     });
-}
+} //End functionality for factors widget
 
 
-// FUNCTIONALITY FOR NUMBER BASE CONVERSIONS
-// Converts only up to a decimal value of 1,000,000
+/* =================================================================
+             FUNCTIONALITY FOR NUMBER BASE CONVERSION
+ * Converts up to a decimal value of 1,000,000
+   ===============================================================*/
 function baseConversionFunctionality() {
     var inputSelectorButtons = document.querySelectorAll("#inputBaseOption button");
     var outputSelectorButtons = document.querySelectorAll("#outputBaseOption button");
-    var i;
+    var convertButton = document.getElementById("baseConversionConvert");
+    var baseConversionOutput = document.getElementById("baseConversionOutput");
     
-    //This function removes the "selected" class from 
-    //   all buttons of a input array
-    function removeSelectedClass(inputArr) {
-        for (i = 0; i < inputArr.length; i++) {
-            inputArr[i].classList.remove("selected");
+    
+    //Add the selected class to buttons
+    addSelectedClassWithEventListeners(inputSelectorButtons);
+    addSelectedClassWithEventListeners(outputSelectorButtons);
+    
+   //Function to run if input is decimal
+    function convertIntegerFromDecimal(inputInteger, base) {
+        var outputArr = [];
+        var temp;
+        
+        while(true) {
+            if (inputInteger > 1) {
+                temp = inputInteger % base;
+                outputArr.unshift(temp);
+                inputInteger = (inputInteger - temp) / base;
+            } else if (inputInteger == 1) {
+                outputArr.unshift(1);
+                break;
+            } else {
+                break;
+            }
         }
+        
+        baseConversionOutput.innerHTML = outputArr.join("");
     }
     
-     //Attach eventListeners to a button thats clicked
-    function attachEventListeners(inputArr) {
-       for (i = 0; i < inputArr.length; i++) {
-            inputArr[i].addEventListener("click", function(event) {
-                removeSelectedClass(inputArr);
-                this.classList.add("selected");
-            });
+    //Function to run when convert button is clicked
+    function convertBetweenBases() {
+        var inputButtonWithSelectedClass; //The selected button in "Input Base"
+        var outputButtonWithSelectedClass; //The selected button in "output Base"
+        var outputBase; //The output base integer
+        var baseConversionInput = parseInt(document.getElementById("baseConversionInput").value);
+        
+        //Find & store the selected input button
+        for (var i = 0; i < inputSelectorButtons.length; i++) {
+            if (inputSelectorButtons[i].classList.contains("selected")) {
+                inputButtonWithSelectedClass = inputSelectorButtons[i].innerHTML;
+            }
         }
-    }
-    
-    attachEventListeners(inputSelectorButtons);
-    attachEventListeners(outputSelectorButtons);
-    
-    
-    //function that converts decimal numbers to binary
-    function decimalToBinary() {
-        var num = temp;
-        var remainder = temp;
-        var toBinaryArray = [];
-        var cache;
-        for (i = 20; i >= 0; i--) {
-            cache = Math.pow(2, i);
-            if (num / cache >= 1) {
-               if (remainder >= cache) {
-                   toBinaryArray.push(1);
-                   remainder -= cache;
-               } else {
-                   toBinaryArray.push(0);
-               }
-            } 
+        
+        //Find & store the selected outoutput button
+        for (var i = 0; i < outputSelectorButtons.length; i++) {
+            if (outputSelectorButtons[i].classList.contains("selected")) {
+                outputButtonWithSelectedClass = outputSelectorButtons[i].innerHTML;
+            }
         }
-        console.log(toBinaryArray.join(""));
-    }
-}
+        
+        //Store the base needed
+        switch (outputButtonWithSelectedClass) {
+            case "Decimal":
+                outputBase = 10;
+                break;
+            case "Octal":
+                outputBase = 8;
+                break;
+            case "Binary":
+                outputBase = 2;
+                break;
+            case "HexaDecimal":
+                outputBase = 16;
+                break;
+            default:
+                console.log("Invalid base input in base converter");
+        }
+        
+        //Find the right conversion function to run
+        switch (inputButtonWithSelectedClass) {
+            case "Decimal":
+                convertIntegerFromDecimal(baseConversionInput, outputBase);
+                break;
+            case "Binary":
+            case "Octal":
+            case "HexaDecimal":
+            default:
+                console.log("Invalid input or functionality not yet implemented");
+        }
+   
+    } //End of convertBetweenBases function
+    
+    
+    //Attach event listener to "convert" button
+    convertButton.addEventListener("click", convertBetweenBases);
+    
+} //End Base Conversion Functionality
 
 
-// FUNCTIONALITY FOR MENU BAR
+/* =================================================================
+                FUNCTIONALITY FOR MENU BAR
+   ===============================================================*/
 function menuFunctionality() {
     var allWidgets = document.getElementsByClassName("widgetDiv");
     var basicCalc = document.getElementById("basicCalc");
     var factorsCalc = document.getElementById("factorsCalc");
     var baseConversionCalc = document.getElementById("baseConversionCalc");
+    var menuButtons = document.getElementsByClassName("menuButton");
+    
+    // Add "selected" class to menu buttons when div is active
+    addSelectedClassWithEventListeners(menuButtons);
         
     // Hides all the Divs except for the menu and wrapper
     function hideAll() {
@@ -265,13 +346,14 @@ function menuFunctionality() {
     // Attach functions to buttons
     document.getElementById("menuCalc").addEventListener("click", showBasicCalc);
     document.getElementById("menuFactors").addEventListener("click", showFactorsCalc);
-
-document.getElementById("menuBaseConversion").addEventListener("click", showBaseConversionCalc);    
-    
-}
+    document.getElementById("menuBaseConversion").addEventListener("click", showBaseConversionCalc);      
+} //End functionality for menu bar
 
 
-// FUNCTION CALLS ALL OTHER FUNCTIONs TO BE PARSED WHEN WINDOW IS LOADED
+/* =================================================================
+                        MAIN FUNCTION
+ * Calls all the other functions
+   ===============================================================*/
 function main() {
     calcFunctionality();
     menuFunctionality();
