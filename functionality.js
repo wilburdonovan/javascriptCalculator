@@ -220,6 +220,7 @@ function baseConversionFunctionality() {
     var outputSelectorButtons = document.querySelectorAll("#outputBaseOption button");
     var convertButton = document.getElementById("baseConversionConvert");
     var baseConversionOutput = document.getElementById("baseConversionOutput");
+    var outputArr, temp;
     
     
     //Add the selected class to buttons
@@ -227,9 +228,10 @@ function baseConversionFunctionality() {
     addSelectedClassWithEventListeners(outputSelectorButtons);
     
    //Function to run if input is decimal
-    function convertIntegerFromDecimal(inputInteger, base) {
-        var outputArr = [];
-        var temp;
+    function convertIntegerFromDecimal(inputValue, base) {
+        var inputInteger = parseInt(inputValue);
+        outputArr = [];
+        temp = 0;
         
         while(true) {
             if (inputInteger > 1) {
@@ -244,7 +246,36 @@ function baseConversionFunctionality() {
             }
         }
         
-        baseConversionOutput.innerHTML = outputArr.join("");
+        return outputArr.join("");
+    }
+    
+    //Function to run if input is binary
+    function convertIntegerFromBinary(inputInteger, base) {
+        var inputLength = inputInteger.length;
+        outputArr = [];
+        temp = 0;
+        
+        //Stores the string recieved in an array in reversed order
+        for (var i = inputLength; i > 0; i--) {
+            outputArr[temp] = inputInteger.charAt(i - 1);
+            temp++;
+        }
+        
+        temp = 0; //Reset temp
+        
+        //Convert from Binary to Decimal
+        for (var i = 0; i < inputLength; i++) {
+            if (outputArr[i] == "1") {
+                temp += Math.pow(2, i);
+            }
+        }
+
+        //Call convertIntegerFromDecimal to convert other bases
+        if (base != 10) {
+            temp = convertIntegerFromDecimal(temp, base);
+        }
+        
+        return temp;
     }
     
     //Function to run when convert button is clicked
@@ -252,7 +283,7 @@ function baseConversionFunctionality() {
         var inputButtonWithSelectedClass; //The selected button in "Input Base"
         var outputButtonWithSelectedClass; //The selected button in "output Base"
         var outputBase; //The output base integer
-        var baseConversionInput = parseInt(document.getElementById("baseConversionInput").value);
+        var baseConversionInput = document.getElementById("baseConversionInput").value;
         
         //Find & store the selected input button
         for (var i = 0; i < inputSelectorButtons.length; i++) {
@@ -289,9 +320,11 @@ function baseConversionFunctionality() {
         //Find the right conversion function to run
         switch (inputButtonWithSelectedClass) {
             case "Decimal":
-                convertIntegerFromDecimal(baseConversionInput, outputBase);
+                baseConversionOutput.innerHTML = "The value of <b>" + baseConversionInput + "</b> in <b>" + inputButtonWithSelectedClass + "</b> form is equal to <b>" + convertIntegerFromDecimal(baseConversionInput, outputBase) + "</b> in <b>" + outputButtonWithSelectedClass + "</b> form.";
                 break;
             case "Binary":
+                baseConversionOutput.innerHTML = "The value of <b>" + baseConversionInput + "</b> in <b>" + inputButtonWithSelectedClass + "</b> form is equal to <b>" + convertIntegerFromBinary(baseConversionInput, outputBase) + "</b> in <b>" + outputButtonWithSelectedClass + "</b> form.";
+                break;
             case "Octal":
             case "HexaDecimal":
             default:

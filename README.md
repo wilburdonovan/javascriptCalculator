@@ -36,15 +36,26 @@ Ideas for future potential functionality:
 - Calculate the greatest common factor of all integers
     in the array.
     
-    
+
+### BASE CONVERSION
+
+
+Currently in implementation as of 13/4/16.
+
+Ideas for future potential functionality:
+
+- Allow conversion of real numbers up to 10 digits from radix
+
+
 ### FUTURE WIDGETS
 
 
 Future widgets to be implemented include:
 
 - A trigonometric calculator.
-- Conversion between number bases- i.e. decimal, octal,
-    hexadecimal and binary with fractional component.
+- ~~Conversion between number bases- i.e. decimal, octal,
+    hexadecimal and binary with fractional component.~~
+    **Implemented 12/4/16 - currently in implementation**
 - Add a "Notebook" div similar to a paintboard to 
     squiggle on, draft etc.
 - A graphing tool for functions.
