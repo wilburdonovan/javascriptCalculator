@@ -42,6 +42,11 @@ Ideas for future potential functionality:
 
 Currently in implementation as of 13/4/16.
 
+Tasks left to complete:
+
+- The decimal to hexadecimal functionality needs to be implemented.
+- Implement hexadecimal to decimal conversion.
+
 Ideas for future potential functionality:
 
 - Allow conversion of real numbers up to 10 digits from radix
@@ -50,7 +55,7 @@ Ideas for future potential functionality:
 ### FUTURE WIDGETS
 
 
-Future widgets to be implemented include:
+Future upgrades could include include:
 
 - A trigonometric calculator.
 - ~~Conversion between number bases- i.e. decimal, octal,
@@ -60,5 +65,6 @@ Future widgets to be implemented include:
     squiggle on, draft etc.
 - A graphing tool for functions.
 - GoogleAds styled to match the webapp.
+- Re-comment all function in javadoc-ish style
   
   

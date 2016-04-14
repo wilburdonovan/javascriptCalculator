@@ -212,8 +212,7 @@ function factorFunctionality() {
 
 
 /* =================================================================
-             FUNCTIONALITY FOR NUMBER BASE CONVERSION
- * Converts up to a decimal value of 1,000,000
+              FUNCTIONALITY FOR BASE CONVERSION
    ===============================================================*/
 function baseConversionFunctionality() {
     var inputSelectorButtons = document.querySelectorAll("#inputBaseOption button");
@@ -232,6 +231,7 @@ function baseConversionFunctionality() {
         var inputInteger = parseInt(inputValue);
         outputArr = [];
         temp = 0;
+        console.log("cIFD input: " + inputValue + " bsde: " + base);
         
         while(true) {
             if (inputInteger > 1) {
@@ -246,6 +246,7 @@ function baseConversionFunctionality() {
             }
         }
         
+        console.log("cIFD return: " + outputArr.join(""));
         return outputArr.join("");
     }
     
@@ -277,6 +278,36 @@ function baseConversionFunctionality() {
         
         return temp;
     }
+    
+    //Function to run if input is octal
+    function convertIntegerFromOctal(inputInteger, base) {
+        outputArr = [];
+        temp = 0;
+        
+        //Store string recieved in an array
+        outputArr = inputInteger.split("");
+        
+        //Convert each index of the array into Binary
+        for (var i = outputArr.length; i > 0; i--) {
+            temp = parseInt(outputArr[i-1]).toString(2);
+            
+            //Add leading 0's to binary string so length = 3 chars
+            if (temp.length == 1) {
+                outputArr[i-1] = "00" + temp;
+            } else if (temp.length == 2) {
+                outputArr[i-1] = "0" + temp;
+            } else {
+                outputArr[i-1] = temp;
+            }
+        }
+        
+        //Reform the string in binary
+        temp = outputArr.join("");
+        
+        //Return the binary code passed into convertIntegerFromBinary
+        return convertIntegerFromBinary(temp, base);
+    }
+    
     
     //Function to run when convert button is clicked
     function convertBetweenBases() {
@@ -326,6 +357,8 @@ function baseConversionFunctionality() {
                 baseConversionOutput.innerHTML = "The value of <b>" + baseConversionInput + "</b> in <b>" + inputButtonWithSelectedClass + "</b> form is equal to <b>" + convertIntegerFromBinary(baseConversionInput, outputBase) + "</b> in <b>" + outputButtonWithSelectedClass + "</b> form.";
                 break;
             case "Octal":
+                baseConversionOutput.innerHTML = "The value of <b>" + baseConversionInput + "</b> in <b>" + inputButtonWithSelectedClass + "</b> form is equal to <b>" + convertIntegerFromOctal(baseConversionInput, outputBase) + "</b> in <b>" + outputButtonWithSelectedClass + "</b> form.";
+                break;
             case "HexaDecimal":
             default:
                 console.log("Invalid input or functionality not yet implemented");
