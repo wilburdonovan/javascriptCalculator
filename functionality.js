@@ -231,7 +231,6 @@ function baseConversionFunctionality() {
         var inputInteger = parseInt(inputValue);
         outputArr = [];
         temp = 0;
-        console.log("cIFD input: " + inputValue + " bsde: " + base);
         
         while(true) {
             if (inputInteger > 1) {
@@ -246,7 +245,6 @@ function baseConversionFunctionality() {
             }
         }
         
-        console.log("cIFD return: " + outputArr.join(""));
         return outputArr.join("");
     }
     
@@ -308,6 +306,63 @@ function baseConversionFunctionality() {
         return convertIntegerFromBinary(temp, base);
     }
     
+    //Function to run if input is hexadecimal
+    function convertIntegerFromHexadecimal(inputInteger, base) {
+        outputArr = [];
+        temp = 0;
+        
+        //Store string recieved in an array
+        outputArr = inputInteger.split("");
+        
+        //Convert each index of the array into Binary
+        for (var i = outputArr.length; i > 0; i--) {
+    
+            //Convert base 16 A-F to decimal forms
+            switch (outputArr[i-1]) {
+                case "A":
+                    outputArr[i-1] = 10;
+                    break;
+                case "B":
+                    outputArr[i-1] = 11;
+                    break;
+                case "C":
+                    outputArr[i-1] = 12;
+                    break;
+                case "D":
+                    outputArr[i-1] = 13;
+                    break;
+                case "E":
+                    outputArr[i-1] = 14;
+                    break;
+                case "F":
+                    outputArr[i-1] = 15;
+                    break;
+                default:
+                   
+            }
+          
+            //Convert each index of the array to binary and store in temp
+            temp = parseInt(outputArr[i-1]).toString(2);
+        
+            //Add leading 0's to binary string so length = 4 chars
+            if (temp.length == 1) {
+                outputArr[i-1] = "000" + temp;
+            } else if (temp.length == 2) {
+                outputArr[i-1] = "00" + temp;
+            } else if (temp.length == 3) {
+                outputArr[i-1] = "0" + temp;
+            } else {
+                outputArr[i-1] = temp;
+            }
+        }
+       
+        //Re-form the string in binary
+        temp = outputArr.join("");
+        
+        //Return the binary code passed into convertIntegerFromBinary
+        return convertIntegerFromBinary(temp, base);
+    }
+    
     
     //Function to run when convert button is clicked
     function convertBetweenBases() {
@@ -360,6 +415,8 @@ function baseConversionFunctionality() {
                 baseConversionOutput.innerHTML = "The value of <b>" + baseConversionInput + "</b> in <b>" + inputButtonWithSelectedClass + "</b> form is equal to <b>" + convertIntegerFromOctal(baseConversionInput, outputBase) + "</b> in <b>" + outputButtonWithSelectedClass + "</b> form.";
                 break;
             case "HexaDecimal":
+                baseConversionOutput.innerHTML = "The value of <b>" + baseConversionInput + "</b> in <b>" + inputButtonWithSelectedClass + "</b> form is equal to <b>" + convertIntegerFromHexadecimal(baseConversionInput, outputBase) + "</b> in <b>" + outputButtonWithSelectedClass + "</b> form.";
+                break;
             default:
                 console.log("Invalid input or functionality not yet implemented");
         }

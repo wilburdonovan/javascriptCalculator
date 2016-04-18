@@ -40,12 +40,11 @@ Ideas for future potential functionality:
 ### BASE CONVERSION
 
 
-Currently in implementation as of 13/4/16.
+Currently in implementation as of 18/4/16.
 
 Tasks left to complete:
 
 - The decimal to hexadecimal functionality needs to be implemented.
-- Implement hexadecimal to decimal conversion.
 
 Ideas for future potential functionality:
 
