@@ -1,35 +1,42 @@
-/* =================================================================
-                GLOBAL/ RECYCLABLE FUNCTIONS
-   ===============================================================*/
+/* =======================================================
+              GLOBAL/ RECYCLABLE FUNCTIONS
+   =====================================================*/
 
 /* This function removes the "selected" class from 
-       all buttons of a input array */
-    function removeSelectedClass(inputArr) {
-        for (i = 0; i < inputArr.length; i++) {
-            inputArr[i].classList.remove("selected");
-        }
+   all buttons of a input array 
+ * @param inputArr: an array of objects
+ */
+function removeSelectedClass(inputArr) {
+    for (i = 0; i < inputArr.length; i++) {
+        inputArr[i].classList.remove("selected");
     }
+}
     
-    /* Attach eventListeners to a button thats clicked from
-     * an input array and adds "selected" class to 
-     * the button that was clicked */
-    function addSelectedClassWithEventListeners(inputArr) {
-       for (i = 0; i < inputArr.length; i++) {
-            inputArr[i].addEventListener("click", function(event) {
-                removeSelectedClass(inputArr);
-                this.classList.add("selected");
-            });
-        }
+/* Attach eventListeners so that when an input object is 
+   clicked, the selected class is removed from related 
+   objects and added to the clicked object
+ * @param inputArr: an array of objects
+ */
+function addSelectedClassWithEventListeners(inputArr) {
+   for (i = 0; i < inputArr.length; i++) {
+        inputArr[i].addEventListener("click", function(event) {
+            removeSelectedClass(inputArr);
+            this.classList.add("selected");
+        });
     }
+}
 
 
-/* =================================================================
-                FUNCTIONALITY FOR BASIC CALCULATOR
-   ===============================================================*/
+/* =======================================================
+            FUNCTIONALITY FOR BASIC CALCULATOR
+   =====================================================*/
 function calcFunctionality() {
-    //Variables
+    //Local calculator variables
     var dispValue = document.getElementById("dispValue"),      
-        dispValue2 = document.getElementById("dispValue2"), secondaryDispVal = "", primaryDispVal = "", calcButtons = document.getElementsByClassName("calcButton"), i, prevKey;
+        dispValue2 = document.getElementById("dispValue2"),
+        secondaryDispVal = "", primaryDispVal = "",
+        calcButtons = document.getElementsByClassName("calcButton"),
+        i, prevKey;
 
     //Basic calculator object
     var calcObject = {
@@ -56,7 +63,7 @@ function calcFunctionality() {
         dispValue2.innerHTML = calcObject.secondaryDisplay;
     }
     
-     //Clears screen when CE is clicked
+     //Resets the calculator
     function CClick() {
         secondaryDispVal = "";
         primaryDispVal = "0";
@@ -73,6 +80,7 @@ function calcFunctionality() {
             CClick();
         }
         
+        //Logic to build the calculation screen
         if (hold == "0" || hold == "1" || hold == "2" || hold == "3" || hold == "4" || hold == "5" || hold == "6" || hold == "7" || hold == "8" || hold == "9" || hold == ".") {
             if (primaryDispVal != "0") {
                 primaryDispVal += hold;
@@ -84,20 +92,22 @@ function calcFunctionality() {
             primaryDispVal = "0";
             secondaryDispVal += " " + hold + " ";
         } else if (hold == "=") {
-            // Calculate answers here
+            // Answers are calculated here when "=" is pressed.
             primaryDispVal = +eval(secondaryDispVal).toFixed(5);
             secondaryDispVal += " =";
         } else {
             secondaryDispVal += hold;
         }
         
+        //Save response to prevKey variable
         prevKey = hold;
         
+        //Update the calculator display
         updateDisplay();
     }
     
    
-    //Clears primary display when C is clicked
+    //Clears primary display when CE is clicked
     function CEClick () {
         secondaryDispVal = secondaryDispVal.substring(0, secondaryDispVal.length-primaryDispVal.length);
         primaryDispVal = "0";
@@ -106,11 +116,9 @@ function calcFunctionality() {
     
     
     /* 
-     * If the length of the primaryDispVal is 1, 
-     * primaryDispVal becomes 0, the last character
-     * in secondaryDispVal is removed.
-     * Else, remove the
-     * last character from both displays
+     * If the length of primaryDispVal is 1, primaryDispVal 
+     * becomes 0, the last character in secondaryDispVal is
+     * removed. Else, remove the last character from both displays
      */
     function delClick() {
         if (primaryDispVal.length == 1) {
@@ -123,7 +131,7 @@ function calcFunctionality() {
     }
     
  
-    // Negative sign converts number
+    // Converts the last digit entered to negative value
     function posnegClick () {
         secondaryDispVal = secondaryDispVal.substring(0, secondaryDispVal.length-primaryDispVal.length);
         primaryDispVal = parseFloat(primaryDispVal);
@@ -133,11 +141,10 @@ function calcFunctionality() {
         updateDisplay();
     }
     
-    
     //Initial Dom Update
     dispValue.innerHTML = calcObject.primaryDisplay;
     
-    //Add event listeners to the buttons
+    //Add event listeners to the calculators' buttons
     for (i = 0; i < calcButtons.length; i++) {
         if (calcButtons[i].innerHTML == "CE") {
             calcButtons[i].addEventListener("click", CEClick);
@@ -154,9 +161,9 @@ function calcFunctionality() {
 } //End basic calculator functionality
 
 
-/* =================================================================
-                FUNCTIONALITY FOR FACTORS WIDGET
-   ===============================================================*/
+/* =======================================================
+            FUNCTIONALITY FOR FACTORS WIDGET
+   =====================================================*/
 function factorFunctionality() {
     // Functions variables
     var factorInputButton = document.getElementById("factorInputButton");
@@ -167,7 +174,7 @@ function factorFunctionality() {
     var outputString = "";
     var temp = 0;
     
-    // Function that will calculate the actual factor
+    // Function that will calculate the actual factors
     function getFactors() {
         temp = parseInt(factorInput.value);
         inputArray.push(temp);
@@ -191,8 +198,7 @@ function factorFunctionality() {
         factorOutput.innerHTML = outputString;
     }
     
-    /* 
-     * When the "Add" button is clicked:
+    /* When the "Add" button is clicked:
      * Clear ouputString
      * Prevent button sending data to server
      * Run getFactors function
@@ -211,9 +217,9 @@ function factorFunctionality() {
 } //End functionality for factors widget
 
 
-/* =================================================================
+/* =======================================================
               FUNCTIONALITY FOR BASE CONVERSION
-   ===============================================================*/
+   =====================================================*/
 function baseConversionFunctionality() {
     var inputSelectorButtons = document.querySelectorAll("#inputBaseOption button");
     var outputSelectorButtons = document.querySelectorAll("#outputBaseOption button");
@@ -226,7 +232,11 @@ function baseConversionFunctionality() {
     addSelectedClassWithEventListeners(inputSelectorButtons);
     addSelectedClassWithEventListeners(outputSelectorButtons);
     
-   //Function to run if input is decimal
+   /* Function to run if input is decimal
+    * @param inputValue: a decimal value to be converted
+    * @param base: the base you want as an output
+    * @return a string value = to the inputValue in specified base
+    */
     function convertIntegerFromDecimal(inputValue, base) {
         var inputInteger = parseInt(inputValue);
         outputArr = [];
@@ -244,11 +254,14 @@ function baseConversionFunctionality() {
                 break;
             }
         }
-        
         return outputArr.join("");
     }
     
-    //Function to run if input is binary
+   /* Function to run if input is binary
+    * @param inputValue: a binary value to be converted
+    * @param base: the base you want as an output
+    * @return a string value = to the inputValue in specified base
+    */
     function convertIntegerFromBinary(inputInteger, base) {
         var inputLength = inputInteger.length;
         outputArr = [];
@@ -277,7 +290,11 @@ function baseConversionFunctionality() {
         return temp;
     }
     
-    //Function to run if input is octal
+   /* Function to run if input is octal
+    * @param inputValue: a octal value to be converted (string)
+    * @param base: the base you want as an output
+    * @return a string value = to the inputValue in specified base
+    */
     function convertIntegerFromOctal(inputInteger, base) {
         outputArr = [];
         temp = 0;
@@ -306,7 +323,11 @@ function baseConversionFunctionality() {
         return convertIntegerFromBinary(temp, base);
     }
     
-    //Function to run if input is hexadecimal
+   /* Function to run if input is hexaDecimal
+    * @param inputValue: a hexaDecimal value to be converted
+    * @param base: the base you want as an output
+    * @return a string value = to the inputValue in specified base
+    */
     function convertIntegerFromHexadecimal(inputInteger, base) {
         outputArr = [];
         temp = 0;
@@ -364,7 +385,7 @@ function baseConversionFunctionality() {
     }
     
     
-    //Function to run when convert button is clicked
+    //The main function to run when the convert button is clicked
     function convertBetweenBases() {
         var inputButtonWithSelectedClass; //The selected button in "Input Base"
         var outputButtonWithSelectedClass; //The selected button in "output Base"
@@ -385,7 +406,7 @@ function baseConversionFunctionality() {
             }
         }
         
-        //Store the base needed
+        //Store the selected base
         switch (outputButtonWithSelectedClass) {
             case "Decimal":
                 outputBase = 10;
@@ -418,7 +439,7 @@ function baseConversionFunctionality() {
                 baseConversionOutput.innerHTML = "The value of <b>" + baseConversionInput + "</b> in <b>" + inputButtonWithSelectedClass + "</b> form is equal to <b>" + convertIntegerFromHexadecimal(baseConversionInput, outputBase) + "</b> in <b>" + outputButtonWithSelectedClass + "</b> form.";
                 break;
             default:
-                console.log("Invalid input or functionality not yet implemented");
+                console.log("Invalid Input");
         }
    
     } //End of convertBetweenBases function
@@ -430,9 +451,9 @@ function baseConversionFunctionality() {
 } //End Base Conversion Functionality
 
 
-/* =================================================================
+/* =======================================================
                 FUNCTIONALITY FOR MENU BAR
-   ===============================================================*/
+   =====================================================*/
 function menuFunctionality() {
     var allWidgets = document.getElementsByClassName("widgetDiv");
     var basicCalc = document.getElementById("basicCalc");
@@ -450,17 +471,19 @@ function menuFunctionality() {
         }
     }
     
-    // Functions to show each div
+    // Hides all divs, show calculator
     function showBasicCalc() {
         hideAll();
         basicCalc.style.display = "block";
     }
     
+    // Hides all divs, show factors widget
     function showFactorsCalc() {
         hideAll();
         factorsCalc.style.display = "block";
     }
     
+    // Hides all divs, show base conversion widgets
     function showBaseConversionCalc() {
         hideAll();
         baseConversionCalc.style.display = "block";
@@ -473,10 +496,10 @@ function menuFunctionality() {
 } //End functionality for menu bar
 
 
-/* =================================================================
+/* =====================================================
                         MAIN FUNCTION
  * Calls all the other functions
-   ===============================================================*/
+   ===================================================*/
 function main() {
     calcFunctionality();
     menuFunctionality();

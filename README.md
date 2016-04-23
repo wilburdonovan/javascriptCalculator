@@ -40,7 +40,7 @@ Ideas for future potential functionality:
 ### BASE CONVERSION
 
 
-Currently in implementation as of 18/4/16.
+Currently in implementation as of 20/4/16.
 
 Tasks left to complete:
 
