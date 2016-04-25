@@ -40,11 +40,7 @@ Ideas for future potential functionality:
 ### BASE CONVERSION
 
 
-Currently in implementation as of 20/4/16.
-
-Tasks left to complete:
-
-- The decimal to hexadecimal functionality needs to be implemented.
+No known bugs.
 
 Ideas for future potential functionality:
 
@@ -59,11 +55,12 @@ Future upgrades could include include:
 - A trigonometric calculator.
 - ~~Conversion between number bases- i.e. decimal, octal,
     hexadecimal and binary with fractional component.~~
-    **Implemented 12/4/16 - currently in implementation**
+    **Implemented 12/4/16 - 25/4/16**
 - Add a "Notebook" div similar to a paintboard to 
     squiggle on, draft etc.
 - A graphing tool for functions.
 - GoogleAds styled to match the webapp.
-- Re-comment all function in javadoc-ish style
+- ~~Re-comment all function in javadoc-ish style.~~
+    **Implemented 23/4/16**
   
   

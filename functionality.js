@@ -254,6 +254,33 @@ function baseConversionFunctionality() {
                 break;
             }
         }
+        
+        //Logic for hexadecimal-only values
+        for (var i = 0; i < outputArr.length; i++) {
+            switch (outputArr[i]) {
+                    case 10:
+                        outputArr[i] = "A";
+                        break;
+                    case 11:
+                        outputArr[i] = "B";
+                        break;
+                    case 12:
+                        outputArr[i] = "C";
+                        break;
+                    case 13:
+                        outputArr[i] = "D";
+                        break;
+                    case 14:
+                        outputArr[i] = "E";
+                        break;
+                    case 15:
+                        outputArr[i] = "F";
+                        break;
+                    default: // Do nothing
+                        break;
+            }
+        }
+        
         return outputArr.join("");
     }
     
