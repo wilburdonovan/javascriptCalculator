@@ -4,7 +4,7 @@
 
 /* This function removes the "selected" class from 
    all buttons of a input array 
- * @param inputArr: an array of objects
+ * @param inputArr: an array of elements
  */
 function removeSelectedClass(inputArr) {
     for (i = 0; i < inputArr.length; i++) {
@@ -12,10 +12,10 @@ function removeSelectedClass(inputArr) {
     }
 }
     
-/* Attach eventListeners so that when an input object is 
+/* Attach eventListeners so that when an input element is 
    clicked, the selected class is removed from related 
-   objects and added to the clicked object
- * @param inputArr: an array of objects
+   elements and added to the clicked element
+ * @param inputArr: an array of elements
  */
 function addSelectedClassWithEventListeners(inputArr) {
    for (i = 0; i < inputArr.length; i++) {
@@ -61,6 +61,34 @@ function calcFunctionality() {
         calcObject.updateDisplay();
         dispValue.innerHTML = calcObject.primaryDisplay;
         dispValue2.innerHTML = calcObject.secondaryDisplay;
+    }
+    
+    
+    //Returns the last integer stored in secondaryDispVal
+    function getLastVal() {
+        var temp = "";
+        var strLength = secondaryDispVal.length;
+        var max = secondaryDispVal.lastIndexOf("+");
+        
+        if (secondaryDispVal.lastIndexOf("-") > max) {
+            if (secondaryDispVal.charAt(secondaryDispVal.lastIndexOf("-") + 1) == " ") {
+                max = secondaryDispVal.lastIndexOf("-");
+            }
+        } else if (secondaryDispVal.lastIndexOf("*") > max) {
+            max = secondaryDispVal.lastIndexOf("*");
+        } else if (secondaryDispVal.lastIndexOf("/") > max) {
+            max = secondaryDispVal.lastIndexOf("/");
+        }
+        
+        for (var i = max + 1; i < strLength; i++) {
+            temp += secondaryDispVal.charAt(i);
+        }
+        
+        if (temp.length == 0 || temp == " ") {
+            temp = null;
+        }
+        
+        return temp;
     }
     
      //Resets the calculator
@@ -141,6 +169,14 @@ function calcFunctionality() {
         updateDisplay();
     }
     
+    
+    // Squares the input integer
+    function squareIt () {
+        var lastVal = getLastVal();
+        secondaryDispVal += " * " + lastVal;
+        updateDisplay();
+    }
+    
     //Initial Dom Update
     dispValue.innerHTML = calcObject.primaryDisplay;
     
@@ -154,6 +190,8 @@ function calcFunctionality() {
             calcButtons[i].addEventListener("click", CClick);
         } else if (calcButtons[i].innerHTML == "+/-") {
             calcButtons[i].addEventListener("click", posnegClick);
+        } else if (calcButtons[i].innerHTML == "x^2") {
+            calcButtons[i].addEventListener("click", squareIt);
         } else {
             calcButtons[i].addEventListener("click", buttonClick);
         }
