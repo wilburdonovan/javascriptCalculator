@@ -180,20 +180,29 @@ function calcFunctionality() {
     //Initial Dom Update
     dispValue.innerHTML = calcObject.primaryDisplay;
     
+    /* Attaches a function to a button so that
+       the function runs when the button is clicked */
+    function runWhenClicked (button, func) {
+        button.addEventListener("click", func);
+    }
+    
     //Add event listeners to the calculators' buttons
     for (i = 0; i < calcButtons.length; i++) {
-        if (calcButtons[i].innerHTML == "CE") {
-            calcButtons[i].addEventListener("click", CEClick);
-        } else if (calcButtons[i].innerHTML == "Del") {
-            calcButtons[i].addEventListener("click", delClick);
-        } else if (calcButtons[i].innerHTML == "C") {
-            calcButtons[i].addEventListener("click", CClick);
-        } else if (calcButtons[i].innerHTML == "+/-") {
-            calcButtons[i].addEventListener("click", posnegClick);
-        } else if (calcButtons[i].innerHTML == "x^2") {
-            calcButtons[i].addEventListener("click", squareIt);
+        var buttonSelected = calcButtons[i];
+        var buttonText = buttonSelected.innerHTML;
+        
+        if (buttonText == "CE") {
+            runWhenClicked(buttonSelected, CEClick);
+        } else if (buttonText == "Del") {
+            runWhenClicked(buttonSelected, delClick);
+        } else if (buttonText == "C") {
+            runWhenClicked(buttonSelected, CClick);
+        } else if (buttonText == "+/-") {
+            runWhenClicked(buttonSelected, posnegClick);
+        } else if (buttonText == "x^2") {
+            runWhenClicked(buttonSelected, squareIt);
         } else {
-            calcButtons[i].addEventListener("click", buttonClick);
+            runWhenClicked(buttonSelected, buttonClick);
         }
     }
 } //End basic calculator functionality
