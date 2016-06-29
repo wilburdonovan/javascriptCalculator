@@ -26,6 +26,11 @@ function addSelectedClassWithEventListeners(inputArr) {
     }
 }
 
+//Console.log function for debugging
+function print (anything) {
+    console.log(anything);
+}
+
 
 /* =======================================================
             FUNCTIONALITY FOR BASIC CALCULATOR
@@ -37,6 +42,8 @@ function calcFunctionality() {
         secondaryDispVal = "", primaryDispVal = "",
         calcButtons = document.getElementsByClassName("calcButton"),
         i, prevKey;
+        var radixIsActive = false;
+        var tempDigit = "";
 
     //Basic calculator object
     var calcObject = {
@@ -97,19 +104,47 @@ function calcFunctionality() {
         primaryDispVal = "0";
         calcObject.updateDisplay("0", " ");
         updateDisplay();
+        tempDigit = "";
+        radixIsActive = false;
     }
    
     //Adds the buttons value to the dispValue strings and updates display
     function buttonClick() {
         var hold = this.innerHTML;
+        var isHoldANumber = hold == "0" || hold == "1" || hold == "2" || hold == "3" || hold == "4" || hold == "5" || hold == "6" || hold == "7" || hold == "8" || hold == "9" || hold == ".";
+        
         
         //If the previous key pressed was "=", reset calc
         if (prevKey == "=") {
             CClick();
+        } 
+        
+        /* If the squareroot button is clicked, keep all the digits succeeding
+         it until a operator or equal sign is clicked. */
+        if (hold == "\u221A"){ 
+            radixIsActive = true;
+            primaryDispVal = "\u221A";
+            updateDisplay();
+            prevKey = hold;
+            return;
+        } else if (radixIsActive) {
+            if (isHoldANumber && radixIsActive) {
+                primaryDispVal += hold;
+                tempDigit += hold;
+                updateDisplay();
+                prevKey = hold;
+                return;
+            } else {
+                radixIsActive = false;
+                tempDigit = Math.sqrt(parseFloat(tempDigit));
+                secondaryDispVal += tempDigit.toString();
+            }
+            
         }
+            
         
         //Logic to build the calculation screen
-        if (hold == "0" || hold == "1" || hold == "2" || hold == "3" || hold == "4" || hold == "5" || hold == "6" || hold == "7" || hold == "8" || hold == "9" || hold == ".") {
+        if (isHoldANumber) {
             if (primaryDispVal != "0") {
                 primaryDispVal += hold;
             } else {
@@ -124,7 +159,9 @@ function calcFunctionality() {
             primaryDispVal = +eval(secondaryDispVal).toFixed(5);
             secondaryDispVal += " =";
         } else {
-            secondaryDispVal += hold;
+            if (!radixIsActive) {
+                secondaryDispVal += hold;                
+            }   
         }
         
         //Save response to prevKey variable
@@ -184,6 +221,11 @@ function calcFunctionality() {
        the function runs when the button is clicked */
     function runWhenClicked (button, func) {
         button.addEventListener("click", func);
+    }
+    
+    
+    function getSquareRoot () {
+        primaryDispVal = "\u221A";
     }
     
     //Add event listeners to the calculators' buttons
