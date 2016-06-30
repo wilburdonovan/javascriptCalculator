@@ -223,9 +223,11 @@ function calcFunctionality() {
         button.addEventListener("click", func);
     }
     
-    
-    function getSquareRoot () {
-        primaryDispVal = "\u221A";
+    //Work with Pi
+    function insertPi () {
+        secondaryDispVal += "3.1416";
+        primaryDispVal = "3.14159";
+        updateDisplay();
     }
     
     //Add event listeners to the calculators' buttons
@@ -243,6 +245,8 @@ function calcFunctionality() {
             runWhenClicked(buttonSelected, posnegClick);
         } else if (buttonText == "x^2") {
             runWhenClicked(buttonSelected, squareIt);
+        } else if (buttonText == "\u03C0") {
+            runWhenClicked(buttonSelected, insertPi);
         } else {
             runWhenClicked(buttonSelected, buttonClick);
         }
