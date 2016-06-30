@@ -20,10 +20,11 @@ Major bugs known for functionality already implemented:
 
 Ideas for future potential functionality:
 
-- Add additional buttons that perform additional functions
+- ~~Add additional buttons that perform additional functions
     or give additional values. e.g pi, squareroot, exponents,
-    factorials.
+    factorials.~~
 - Add the ability to use the keyboard numberpad for input.
+- Add buttons for open and close brackets to organise calculations
   
   
 ### FACTORS
@@ -62,5 +63,6 @@ Future upgrades could include include:
 - GoogleAds styled to match the webapp.
 - ~~Re-comment all function in javadoc-ish style.~~
     **Implemented 23/4/16**
+- Update READMe to include user guide.
   
   

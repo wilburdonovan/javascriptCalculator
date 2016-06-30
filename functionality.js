@@ -98,7 +98,12 @@ function calcFunctionality() {
         return temp;
     }
     
-     //Resets the calculator
+    //Removes the last integer from secondaryDispVal
+    function removeLastInteger () {
+        secondaryDispVal = secondaryDispVal.substring(0, secondaryDispVal.length-primaryDispVal.length);
+    }
+    
+    //Resets the calculator
     function CClick() {
         secondaryDispVal = "";
         primaryDispVal = "0";
@@ -174,7 +179,7 @@ function calcFunctionality() {
    
     //Clears primary display when CE is clicked
     function CEClick () {
-        secondaryDispVal = secondaryDispVal.substring(0, secondaryDispVal.length-primaryDispVal.length);
+        removeLastInteger();
         primaryDispVal = "0";
         updateDisplay();
     }
@@ -230,6 +235,21 @@ function calcFunctionality() {
         updateDisplay();
     }
     
+    //Functionality for the factorial button
+    function calcFactorial () {
+        var lastDigit = parseInt(getLastVal());
+        var answer = 1;
+        
+        for (i = lastDigit; i > 0; i--) {
+            answer *= i;
+        }
+        
+        removeLastInteger();
+        primaryDispVal = lastDigit + "!";
+        secondaryDispVal += answer;
+        updateDisplay();
+    }
+    
     //Add event listeners to the calculators' buttons
     for (i = 0; i < calcButtons.length; i++) {
         var buttonSelected = calcButtons[i];
@@ -247,6 +267,8 @@ function calcFunctionality() {
             runWhenClicked(buttonSelected, squareIt);
         } else if (buttonText == "\u03C0") {
             runWhenClicked(buttonSelected, insertPi);
+        } else if (buttonText == "n!") {
+            runWhenClicked(buttonSelected, calcFactorial);
         } else {
             runWhenClicked(buttonSelected, buttonClick);
         }
