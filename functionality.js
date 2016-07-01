@@ -70,6 +70,12 @@ function calcFunctionality() {
         dispValue2.innerHTML = calcObject.secondaryDisplay;
     }
     
+     //Function to run when an invalid mathematical operation is attempted
+    function invalidOperation () {
+        primaryDispVal = "Invalid";
+        updateDisplay();
+        prevKey = "=";
+    }
     
     //Returns the last integer stored in secondaryDispVal
     function getLastVal() {
@@ -113,16 +119,19 @@ function calcFunctionality() {
         radixIsActive = false;
     }
    
+    //If the previous button was "=", reset calc
+    function checkPreviousButton () {
+        if (prevKey == "=") {
+            CClick();
+        } 
+    }
+    
     //Adds the buttons value to the dispValue strings and updates display
     function buttonClick() {
         var hold = this.innerHTML;
         var isHoldANumber = hold == "0" || hold == "1" || hold == "2" || hold == "3" || hold == "4" || hold == "5" || hold == "6" || hold == "7" || hold == "8" || hold == "9" || hold == ".";
         
-        
-        //If the previous key pressed was "=", reset calc
-        if (prevKey == "=") {
-            CClick();
-        } 
+        checkPreviousButton();
         
         /* If the squareroot button is clicked, keep all the digits succeeding
          it until a operator or equal sign is clicked. */
@@ -203,6 +212,7 @@ function calcFunctionality() {
  
     // Converts the last digit entered to negative value
     function posnegClick () {
+        checkPreviousButton();
         secondaryDispVal = secondaryDispVal.substring(0, secondaryDispVal.length-primaryDispVal.length);
         primaryDispVal = parseFloat(primaryDispVal);
         primaryDispVal *= -1;
@@ -230,24 +240,33 @@ function calcFunctionality() {
     
     //Work with Pi
     function insertPi () {
+        checkPreviousButton();
         secondaryDispVal += "3.1416";
         primaryDispVal = "3.14159";
         updateDisplay();
+        prevKey = "3.14159";
     }
-    
+      
     //Functionality for the factorial button
     function calcFactorial () {
+    
         var lastDigit = parseInt(getLastVal());
         var answer = 1;
         
         for (i = lastDigit; i > 0; i--) {
             answer *= i;
         }
+    
+        if (isNaN(lastDigit)) {
+            invalidOperation();
+        } else {
+            removeLastInteger();
+            primaryDispVal = lastDigit + "!";
+            secondaryDispVal += answer;
+            updateDisplay();
+            prevKey = "!";
+        }
         
-        removeLastInteger();
-        primaryDispVal = lastDigit + "!";
-        secondaryDispVal += answer;
-        updateDisplay();
     }
     
     //Add event listeners to the calculators' buttons
