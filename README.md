@@ -1,6 +1,20 @@
 # Javascript Math Assistant
 ## Written by: Wilbur Donovan
 
+## HOW TO USE
+CALCULATOR: Key in any valid calculation using the calculator
+buttons and hit "="
+
+FACTORS: Enter a valid integer in the text field provided and
+press "Add" to calculate all the factors of the number entered
+
+BASE CONVERSION:
+1. Insert valid number in text field
+2. Select what number base the input is
+3. Select what number base the required output should be
+4. Hit convert to generate output
+
+
 ### CALCULATOR
 
 
@@ -63,6 +77,6 @@ Future upgrades could include include:
 - GoogleAds styled to match the webapp.
 - ~~Re-comment all function in javadoc-ish style.~~
     **Implemented 23/4/16**
-- Update READMe to include user guide.
+- ~~Update READMe to include basic user guide.~~
   
   

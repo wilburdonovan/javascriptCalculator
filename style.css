@@ -3,7 +3,7 @@ body {
 }
 
 #wrapper {
-	max-width: 600px;
+	max-width: 500px;
     text-align: center;
 }
 
@@ -177,4 +177,18 @@ body {
     background-color: #008eff;
     color: #000;
     font-weight: bold;
+}
+
+#appHeader {
+	max-width: 900px;
+    text-align: center;
+    background-color: #00bfff;
+    margin: 10px 10px 0px 20px;
+    color: #fff;
+    font-size: 30px;
+    font-family: sans-serif;
+}
+
+#appHeader p {
+	margin: 10px, 0px, 10px, 0px;
 }
