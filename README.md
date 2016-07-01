@@ -37,8 +37,9 @@ Ideas for future potential functionality:
 - ~~Add additional buttons that perform additional functions
     or give additional values. e.g pi, squareroot, exponents,
     factorials.~~
-- Add the ability to use the keyboard numberpad for input.
+- Add the ability to use the keyboard numberpad for input
 - Add buttons for open and close brackets to organise calculations
+- Add more "exception handling" for invalid calculations
   
   
 ### FACTORS
