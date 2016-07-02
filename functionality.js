@@ -613,6 +613,59 @@ function baseConversionFunctionality() {
 
 
 /* =======================================================
+             FUNCTIONALITY FOR SCRIBBLEPAD
+   =====================================================*/
+function scribbleFunctionality() {
+    var c = document.getElementById("scribbleCanvas");
+    var cDiv = document.getElementById("scribbleDiv");
+    var ctx = c.getContext("2d");
+    var scribble = false;
+    var x, y, prevX, prevY;
+    var isDragging = false;
+    
+    /* Takes in an event as a parameter, calculates
+    the mouse position, draws a very small rectangle
+    at that position, and if dragged, draws a line 
+    between the new rectangle and old rectangle */
+    function draw (event) {
+        x = event.clientX - 532;
+        y = event.clientY - 142;
+        ctx.fillStyle = "#000000";
+        ctx.fillRect(x,y,.1,.1);
+        
+        if (prevX != null && isDragging) {
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(x,y);
+            ctx.lineTo(prevX, prevY);
+            ctx.stroke(); 
+        }
+        
+        prevX = x;
+        prevY = y;
+    }
+    
+    c.addEventListener("mousedown", function (event) {
+        scribble = true;
+        draw(event);
+    });
+    
+    c.addEventListener("mousemove", function (event) {
+        if (scribble) {
+            isDragging = true;
+            draw(event);
+        }
+    });
+    
+    c.addEventListener("mouseup", function () {
+        scribble = false;
+        isDragging = false;
+    });
+    
+} //End functionality for scribble widget
+
+
+/* =======================================================
                 FUNCTIONALITY FOR MENU BAR
    =====================================================*/
 function menuFunctionality() {
@@ -666,6 +719,7 @@ function main() {
     menuFunctionality();
     factorFunctionality();
     baseConversionFunctionality();
+    scribbleFunctionality();
 }
 
 // Call main onload

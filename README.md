@@ -14,6 +14,12 @@ BASE CONVERSION:
 3. Select what number base the required output should be
 4. Hit convert to generate output
 
+SCRIBBLE: The scribblepad remains next to the utility and will 
+follow the page down when scrolling. Click and drag to write
+or draw. Click clear to clear the canvas. Click erase, then 
+click and drag unwanted input to erase. Click pen to return
+to write capability.
+
 
 ### CALCULATOR
 
@@ -63,8 +69,23 @@ Ideas for future potential functionality:
 - Allow conversion of real numbers up to 10 digits from radix
 
 
-### FUTURE WIDGETS
+### SCRIBBLE PAD
 
+No known bugs.
+
+Features currently in implementation:
+
+- Clear functionality to reset the pad to an empty state
+- Erase functionality to erase unwanted writing
+
+Ideas for future potential funtionality:
+
+- Allow coloured pens
+- Allow highlighter capabilities
+- Allow stored state of current writing
+
+
+### FUTURE WIDGETS
 
 Future upgrades could include include:
 
@@ -72,9 +93,11 @@ Future upgrades could include include:
 - ~~Conversion between number bases- i.e. decimal, octal,
     hexadecimal and binary with fractional component.~~
     **Implemented 12/4/16 - 25/4/16**
-- Add a "Notebook" div similar to a paintboard to 
-    squiggle on, draft etc.
+- ~~Add a "Notebook" div similar to a paintboard to 
+    squiggle on, draft etc.~~
+    **Implemented 2/7/16**
 - A graphing tool for functions.
+- A calculator that performs operations on fractions.
 - GoogleAds styled to match the webapp.
 - ~~Re-comment all function in javadoc-ish style.~~
     **Implemented 23/4/16**
