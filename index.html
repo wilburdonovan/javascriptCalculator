@@ -10,104 +10,108 @@
     <script src="functionality.js"></script>
 </head>
 <body>
-    <div id="appHeader" class="clearFix">
-        <p> MATH ASSISTANT </p>
-    
-    </div>
-    <div id="wrapper" class="clearFix">
-        <!-- MENU -->
-        <div id="menu">
-            <button class="menuButton BUTTON" id="menuCalc"> Basic Calculator</button>
-            <button class="menuButton BUTTON" id="menuFactors"> Factors </button>
-            <button class="menuButton BUTTON" id="menuBaseConversion"> Base Conversion </button>
+    <div id="masterWrapper">
+        <div id="appHeader" class="clearFix">
+            <p> MATH ASSISTANT </p>
+
         </div>
-        <!-- CALCULATOR DIV -->
-        <div id="basicCalc" class="widgetDiv">
-             <!-- The "screen" of the calculator" -->   
-            <div id="display">
-                <div>
-                    <p id=dispValue2></p>
-                </div>
-                <div>
-                    <p id="dispValue"></p>
-                </div>   
+        <div id="wrapper" class="clearFix">
+            <!-- MENU -->
+            <div id="menu">
+                <button class="menuButton BUTTON" id="menuCalc"> Basic Calculator</button>
+                <button class="menuButton BUTTON" id="menuFactors"> Factors </button>
+                <button class="menuButton BUTTON" id="menuBaseConversion"> Base Conversion </button>
             </div>
-            <!-- Put the buttons of the calculator-->
-            <div id="calcButtons">
-                <div>
-                    <button class="calcButton BUTTON">x^2</button>
-                    <button class="calcButton BUTTON">&radic;</button>
-                    <button class="calcButton BUTTON">&pi;</button>
-                    <button class="calcButton BUTTON endButton">n!</button>
+            <!-- CALCULATOR DIV -->
+            <div id="basicCalc" class="widgetDiv">
+                 <!-- The "screen" of the calculator" -->   
+                <div id="display">
+                    <div>
+                        <p id=dispValue2></p>
+                    </div>
+                    <div>
+                        <p id="dispValue"></p>
+                    </div>   
                 </div>
-                <div>
-                    <button class="calcButton BUTTON">CE</button>
-                    <button class="calcButton BUTTON">C</button>
-                    <button class="calcButton BUTTON">Del</button>
-                    <button class="calcButton BUTTON endButton">/</button>
-                </div>
-                <div>
-                    <button class="calcButton BUTTON">7</button>
-                    <button class="calcButton BUTTON">8</button>
-                    <button class="calcButton BUTTON">9</button>
-                    <button class="calcButton BUTTON endButton">*</button>
-                </div>
-                <div class="rowWrapper">
-                    <button class="calcButton BUTTON">4</button>
-                    <button class="calcButton BUTTON">5</button>
-                    <button class="calcButton BUTTON">6</button>
-                    <button class="calcButton BUTTON endButton">-</button>
-                </div>
-                <div>
-                    <button class="calcButton BUTTON">1</button>
-                    <button class="calcButton BUTTON">2</button>
-                    <button class="calcButton BUTTON">3</button>
-                    <button class="calcButton BUTTON endButton">+</button>
-                </div>
-                <div>
-                    <button class="calcButton BUTTON">+/-</button>
-                    <button class="calcButton BUTTON">0</button>
-                    <button class="calcButton BUTTON">.</button>
-                    <button class="calcButton BUTTON endButton">=</button>
+                <!-- Put the buttons of the calculator-->
+                <div id="calcButtons">
+                    <div>
+                        <button class="calcButton BUTTON">x^2</button>
+                        <button class="calcButton BUTTON">&radic;</button>
+                        <button class="calcButton BUTTON">&pi;</button>
+                        <button class="calcButton BUTTON endButton">n!</button>
+                    </div>
+                    <div>
+                        <button class="calcButton BUTTON">CE</button>
+                        <button class="calcButton BUTTON">C</button>
+                        <button class="calcButton BUTTON">Del</button>
+                        <button class="calcButton BUTTON endButton">/</button>
+                    </div>
+                    <div>
+                        <button class="calcButton BUTTON">7</button>
+                        <button class="calcButton BUTTON">8</button>
+                        <button class="calcButton BUTTON">9</button>
+                        <button class="calcButton BUTTON endButton">*</button>
+                    </div>
+                    <div class="rowWrapper">
+                        <button class="calcButton BUTTON">4</button>
+                        <button class="calcButton BUTTON">5</button>
+                        <button class="calcButton BUTTON">6</button>
+                        <button class="calcButton BUTTON endButton">-</button>
+                    </div>
+                    <div>
+                        <button class="calcButton BUTTON">1</button>
+                        <button class="calcButton BUTTON">2</button>
+                        <button class="calcButton BUTTON">3</button>
+                        <button class="calcButton BUTTON endButton">+</button>
+                    </div>
+                    <div>
+                        <button class="calcButton BUTTON">+/-</button>
+                        <button class="calcButton BUTTON">0</button>
+                        <button class="calcButton BUTTON">.</button>
+                        <button class="calcButton BUTTON endButton">=</button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- FACTOR DIV -->
-        <div id="factorsCalc" class="widgetDiv notCalcDiv">
-            <header class="widgetHeader"> Factors Calculator</header>
-            <p class="justifyPara"> What number would you like factors for? Please enter each number at a time followed by pressing the "add" button.</p>
-            <form>
-                <input type="text" id="factorInput" class="inputBox"><br>
-                <button class="factorButton BUTTON" id="factorInputButton"> Add </button>
-                <button class="factorButton BUTTON" id="factorResetButton"> Reset </button>
-            </form>
-            <p id="factorOutput"></p>
-        </div>
-        <!-- BASE CONVERSION DIV -->
-        <div id="baseConversionCalc" class="widgetDiv notCalcDiv">
-            <header class="widgetHeader"> Base Conversion</header>
-            <p class="justifyPara"> This widget takes integers from a common base and converts them to an integer in a different common base. Common bases are binary, octal, decimal and hexadecimal. </p>
-            <input type="text" id="baseConversionInput" class="inputBox">
-            <button class="BUTTON" id="baseConversionConvert"> Convert </button><br>
-            <ul class="noBullets noPadding inlineBlock" id="inputBaseOption"> 
-                <dl class="smallHeading inlineBlock"> Input Base </dl>
-                <li><button class="BUTTON baseConversionButton">Decimal</button></li>
-                <li><button class="BUTTON baseConversionButton">Binary</button></li>
-                <li><button class="BUTTON baseConversionButton">Octal</button></li>
-                <li><button class="BUTTON baseConversionButton">HexaDecimal</button></li>
-            </ul>
-            <ul class="noBullets noPadding inlineBlock" id="outputBaseOption"> 
-                <dl class="smallHeading inlineBlock"> Output Base </dl>
-                <li><button class="BUTTON baseConversionButton">Decimal</button></li>
-                <li><button class="BUTTON baseConversionButton">Binary</button></li>
-                <li><button class="BUTTON baseConversionButton">Octal</button></li>
-                <li><button class="BUTTON baseConversionButton">HexaDecimal</button></li>
-            </ul>
-            <p id="baseConversionOutput"></p>
-        </div>
-        <!-- SCRIBBLE DIV -->
-        <div id="scribbleDiv">
-            <canvas id="scribbleCanvas" width="393" height="400"></canvas>
+            <!-- FACTOR DIV -->
+            <div id="factorsCalc" class="widgetDiv notCalcDiv">
+                <header class="widgetHeader"> Factors Calculator</header>
+                <p class="justifyPara"> What number would you like factors for? Please enter each number at a time followed by pressing the "add" button.</p>
+                <form>
+                    <input type="text" id="factorInput" class="inputBox"><br>
+                    <button class="factorButton BUTTON" id="factorInputButton"> Add </button>
+                    <button class="factorButton BUTTON" id="factorResetButton"> Reset </button>
+                </form>
+                <p id="factorOutput"></p>
+            </div>
+            <!-- BASE CONVERSION DIV -->
+            <div id="baseConversionCalc" class="widgetDiv notCalcDiv">
+                <header class="widgetHeader"> Base Conversion</header>
+                <p class="justifyPara"> This widget takes integers from a common base and converts them to an integer in a different common base. Common bases are binary, octal, decimal and hexadecimal. </p>
+                <input type="text" id="baseConversionInput" class="inputBox">
+                <button class="BUTTON" id="baseConversionConvert"> Convert </button><br>
+                <ul class="noBullets noPadding inlineBlock" id="inputBaseOption"> 
+                    <dl class="smallHeading inlineBlock"> Input Base </dl>
+                    <li><button class="BUTTON baseConversionButton">Decimal</button></li>
+                    <li><button class="BUTTON baseConversionButton">Binary</button></li>
+                    <li><button class="BUTTON baseConversionButton">Octal</button></li>
+                    <li><button class="BUTTON baseConversionButton">HexaDecimal</button></li>
+                </ul>
+                <ul class="noBullets noPadding inlineBlock" id="outputBaseOption"> 
+                    <dl class="smallHeading inlineBlock"> Output Base </dl>
+                    <li><button class="BUTTON baseConversionButton">Decimal</button></li>
+                    <li><button class="BUTTON baseConversionButton">Binary</button></li>
+                    <li><button class="BUTTON baseConversionButton">Octal</button></li>
+                    <li><button class="BUTTON baseConversionButton">HexaDecimal</button></li>
+                </ul>
+                <p id="baseConversionOutput"></p>
+            </div>
+            <!-- SCRIBBLE DIV -->
+            <div id="scribbleDiv">
+                <canvas id="scribbleCanvas" width="393" height="400">
+                    <p>HTML5 Canvas not available on your browser</p>
+                </canvas>
+            </div>
         </div>
     </div>
 </body>

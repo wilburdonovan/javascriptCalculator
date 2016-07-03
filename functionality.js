@@ -311,7 +311,24 @@ function factorFunctionality() {
     // Function that will calculate the actual factors
     function getFactors() {
         temp = parseInt(factorInput.value);
-        inputArray.push(temp);
+        
+        // Validation for input
+        if (isNaN(temp)) {
+            alert("Invalid Number Entered in text field. Please enter a valid integer.");
+            return;
+        } else if (temp == 0) {
+            alert("All real numbers are factors of 0.");
+            return;
+        } else if (temp > 20000) {
+            alert("That integer is too large. Please try a smaller value.");
+            return;
+        } else if (temp < 0) {
+            alert("Please enter a natural number.");
+            return;
+        } else {
+            inputArray.push(temp);
+        }
+        
         
         for (var i = 0; i < inputArray.length; i++) {
             outputString += "- The factors for " + inputArray[i] + " are: ";
@@ -622,22 +639,41 @@ function scribbleFunctionality() {
     var scribble = false;
     var x, y, prevX, prevY;
     var isDragging = false;
+    var bRect, offsetLeft, offsetTop;
+    
+    // Insert scribblepad title within canvas
+    ctx.font = "15px Arial";
+    ctx.fillStyle = "#008eff";
+    ctx.fillText("ScribblePad",305,390);
+    
+    // Sets x and y coordinates
+    function setCords (event) {
+        x = event.clientX - offsetLeft;
+        y = event.clientY - offsetTop;
+    }
+    
+    // Calculates offsets
+    function setOffsets () {
+        bRect = c.getBoundingClientRect();
+        offsetLeft = bRect.left;
+        offsetTop = bRect.top;
+    }
     
     /* Takes in an event as a parameter, calculates
     the mouse position, draws a very small rectangle
     at that position, and if dragged, draws a line 
     between the new rectangle and old rectangle */
     function draw (event) {
-        x = event.clientX - 532;
-        y = event.clientY - 142;
+        setCords(event);
         ctx.fillStyle = "#000000";
         ctx.fillRect(x,y,.1,.1);
         
         if (prevX != null && isDragging) {
-            ctx.lineWidth = 2;
+            ctx.lineWidth = 1.1;
             ctx.beginPath();
             ctx.moveTo(x,y);
             ctx.lineTo(prevX, prevY);
+            ctx.closePath();
             ctx.stroke(); 
         }
         
@@ -646,6 +682,7 @@ function scribbleFunctionality() {
     }
     
     c.addEventListener("mousedown", function (event) {
+        setOffsets(); //In case of window resize, scrollbar appearance etc
         scribble = true;
         draw(event);
     });
