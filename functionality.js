@@ -636,15 +636,20 @@ function scribbleFunctionality() {
     var c = document.getElementById("scribbleCanvas");
     var cDiv = document.getElementById("scribbleDiv");
     var ctx = c.getContext("2d");
-    var scribble = false;
+    var scribble = false, isDragging = false;
+    var clearButton = document.getElementById("clearCanvas");
+    var colorSelector = document.getElementById("colorSelector");
     var x, y, prevX, prevY;
-    var isDragging = false;
     var bRect, offsetLeft, offsetTop;
+    var blackColor = "#000000", blueColor = "#202dd1", redColor = "#be1d1d", greenColor = "#236911";
+    var penColor = blackColor;
     
     // Insert scribblepad title within canvas
-    ctx.font = "15px Arial";
-    ctx.fillStyle = "#008eff";
-    ctx.fillText("ScribblePad",305,390);
+    function insertTitle () {
+        ctx.font = "15px Arial";
+        ctx.fillStyle = "#008eff";
+        ctx.fillText("ScribblePad",305,390);
+    }
     
     // Sets x and y coordinates
     function setCords (event) {
@@ -665,7 +670,8 @@ function scribbleFunctionality() {
     between the new rectangle and old rectangle */
     function draw (event) {
         setCords(event);
-        ctx.fillStyle = "#000000";
+        ctx.fillStyle = penColor;
+        ctx.strokeStyle = penColor;
         ctx.fillRect(x,y,.1,.1);
         
         if (prevX != null && isDragging) {
@@ -680,6 +686,41 @@ function scribbleFunctionality() {
         prevX = x;
         prevY = y;
     }
+    
+    // Clears the canvas
+    function clearCanvas () {
+        ctx.clearRect(0, 0, c.width, c.height);
+        insertTitle();
+    }
+    
+    // Change the pens color
+    function changePenColor () {
+        var selectedOption = colorSelector.value;
+
+        switch (selectedOption) {
+            case "blue":
+                penColor = blueColor;
+                break;
+            case "black":
+                penColor = blackColor;
+                break;
+            case "red":
+                penColor = redColor;
+                break;
+            case "green":
+                penColor = greenColor;
+                break;
+            default:
+                penColor = blackColor;
+        }
+    }
+    
+    insertTitle(); //Initial call
+    
+    // Attach functions to events
+    clearButton.addEventListener("click", clearCanvas);
+    
+    colorSelector.addEventListener("change", changePenColor);
     
     c.addEventListener("mousedown", function (event) {
         setOffsets(); //In case of window resize, scrollbar appearance etc
@@ -698,6 +739,16 @@ function scribbleFunctionality() {
         scribble = false;
         isDragging = false;
     });
+    
+    c.addEventListener("mouseenter", function () {
+        c.style.cursor = "crosshair";
+    });
+    
+    c.addEventListener("mouseleave", function () {
+        c.style.cursor = "default";
+    });
+    
+    
     
 } //End functionality for scribble widget
 

@@ -75,12 +75,11 @@ No known bugs.
 
 Features currently in implementation:
 
-- Clear functionality to reset the pad to an empty state
 - Erase functionality to erase unwanted writing
 
 Ideas for future potential funtionality:
 
-- Allow coloured pens
+- ~~Allow coloured pens~~
 - Allow highlighter capabilities
 - Allow stored state of current writing
 
