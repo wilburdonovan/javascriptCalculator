@@ -20,6 +20,9 @@ or draw. Click clear to clear the canvas. Click erase, then
 click and drag unwanted input to erase. Click pen to return
 to write capability.
 
+FRACTIONS: Input both fractions, chose an operation, click on
+calculate.
+
 
 ### CALCULATOR
 
@@ -37,12 +40,17 @@ Major bugs known for functionality already implemented:
     automatically runs the CE function.~~ 
     **Fixed 11/4/2016**
     
+- Multiplying two squareroots together gives some incorrect
+    number
+    
 
 Ideas for future potential functionality:
 
 - ~~Add additional buttons that perform additional functions
     or give additional values. e.g pi, squareroot, exponents,
     factorials.~~
+- Make it so that if a operator is pressed after a operation,
+    the operation is carried out on the previous answer.
 - Add the ability to use the keyboard numberpad for input
 - Add buttons for open and close brackets to organise calculations
 - Add more "exception handling" for invalid calculations
@@ -82,6 +90,15 @@ Ideas for future potential funtionality:
 - ~~Allow coloured pens~~
 - Allow highlighter capabilities
 - Allow stored state of current writing
+
+
+### FRACTIONS
+
+No known bugs.
+
+Features currently in implementation:
+
+- Full functionality currently being implemented
 
 
 ### FUTURE WIDGETS

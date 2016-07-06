@@ -155,7 +155,18 @@ function calcFunctionality() {
             }
             
         }
-            
+        
+        // Divide by 0 prevention
+        if (prevKey == "/" && hold == "0") {
+            invalidOperation();
+            return;
+        }
+        
+        // Prevents double non number values
+        if (!isHoldANumber && isNaN(prevKey)) {
+            invalidOperation();
+            return;
+        }
         
         //Logic to build the calculation screen
         if (isHoldANumber) {
@@ -241,7 +252,15 @@ function calcFunctionality() {
     //Work with Pi
     function insertPi () {
         checkPreviousButton();
-        secondaryDispVal += "3.1416";
+        
+        //Check to see if last value entered is a number
+        if (!isNaN(prevKey)) {
+            secondaryDispVal += " * 3.1416";
+        } else {
+            secondaryDispVal += "3.1416";
+        }
+        
+        
         primaryDispVal = "3.14159";
         updateDisplay();
         prevKey = "3.14159";
@@ -641,7 +660,8 @@ function scribbleFunctionality() {
     var colorSelector = document.getElementById("colorSelector");
     var x, y, prevX, prevY;
     var bRect, offsetLeft, offsetTop;
-    var blackColor = "#000000", blueColor = "#202dd1", redColor = "#be1d1d", greenColor = "#236911";
+    var blackColor = "#000000", blueColor = "#202dd1", redColor = "#be1d1d", greenColor = "#236911",
+        yellowColor = "#e7ce28", purpleColor = "#7c28c8", pinkColor = "#cb23be";
     var penColor = blackColor;
     
     // Insert scribblepad title within canvas
@@ -672,7 +692,7 @@ function scribbleFunctionality() {
         setCords(event);
         ctx.fillStyle = penColor;
         ctx.strokeStyle = penColor;
-        ctx.fillRect(x,y,.1,.1);
+        ctx.fillRect(x,y,.01,.01);
         
         if (prevX != null && isDragging) {
             ctx.lineWidth = 1.1;
@@ -709,6 +729,15 @@ function scribbleFunctionality() {
                 break;
             case "green":
                 penColor = greenColor;
+                break;
+            case "pink":
+                penColor = pinkColor;
+                break;
+            case "purple":
+                penColor = purpleColor;
+                break;
+            case "yellow":
+                penColor = yellowColor;
                 break;
             default:
                 penColor = blackColor;
@@ -754,6 +783,14 @@ function scribbleFunctionality() {
 
 
 /* =======================================================
+             FUNCTIONALITY FOR FRACTIONS
+   =====================================================*/
+function fractionsFunctionality() {
+    print("called");
+}
+
+
+/* =======================================================
                 FUNCTIONALITY FOR MENU BAR
    =====================================================*/
 function menuFunctionality() {
@@ -761,6 +798,7 @@ function menuFunctionality() {
     var basicCalc = document.getElementById("basicCalc");
     var factorsCalc = document.getElementById("factorsCalc");
     var baseConversionCalc = document.getElementById("baseConversionCalc");
+    var fractionsCalc = document.getElementById("fractionsCalc");
     var menuButtons = document.getElementsByClassName("menuButton");
     
     // Add "selected" class to menu buttons when div is active
@@ -791,10 +829,17 @@ function menuFunctionality() {
         baseConversionCalc.style.display = "block";
     }
     
+    // Hides all divs, show fractions widget
+    function showFractions() {
+        hideAll();
+        fractionsCalc.style.display = "block";
+    }
+    
     // Attach functions to buttons
     document.getElementById("menuCalc").addEventListener("click", showBasicCalc);
     document.getElementById("menuFactors").addEventListener("click", showFactorsCalc);
-    document.getElementById("menuBaseConversion").addEventListener("click", showBaseConversionCalc);      
+    document.getElementById("menuBaseConversion").addEventListener("click", showBaseConversionCalc);
+    document.getElementById("menuFractions").addEventListener("click", showFractions);
 } //End functionality for menu bar
 
 
@@ -808,6 +853,7 @@ function main() {
     factorFunctionality();
     baseConversionFunctionality();
     scribbleFunctionality();
+    fractionsFunctionality();
 }
 
 // Call main onload
