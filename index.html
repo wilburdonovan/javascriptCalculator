@@ -128,6 +128,22 @@
             <!-- FRACTIONS DIV -->
             <div id="fractionsCalc" class="widgetDiv notCalcDiv">
             <p class="justifyPara"> Input two fractions, select operation, click calculate. </p>
+            <div id="fractionInputWrapper" class="floatLeft">
+                <span class="bold">Fraction 1: </span><input type="text" id="fraction1" class="inputBox" />
+                   <div id="fractionOperations">
+                    <button class="BUTTON fracBtn">+</button>
+                    <button class="BUTTON fracBtn">-</button>
+                    <button class="BUTTON fracBtn">*</button>
+                    <button class="BUTTON fracBtn">/</button>
+                   </div>
+                <span class="bold">Fraction 2:</span> <input type="text" id="fraction2" class="inputBox" />
+                <button id="fractionsCalcBtn" class="BUTTON">Calculate</button>
+            </div>
+            <div id="fractionOutputWrapper" class="floatLeft">
+                <span class="bold"> Answer:
+                    <p id="fractionOutput"></p>
+                </span>
+            </div>
             </div>
         </div>
     </div>

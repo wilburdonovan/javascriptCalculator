@@ -65,7 +65,7 @@ body {
     font-family: sans-serif;
     color: #fff;
     background-color: #00bfff;
-    border-radius: 8px;
+    border-radius: 2px;
     border: 0px;
 }
 
@@ -210,4 +210,38 @@ body {
     width: 10px;
     height: 10px;
     background-color: black;
+}
+
+#fractionOperations {
+	text-align: center;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+#fractionInputWrapper {
+    width: 55%;
+    max-width: 60%;
+    border-right: 1px solid #999;
+    padding-right: 10px;
+}
+
+#fractionOutputWrapper {
+    width: 40%;
+    max-width: 40%;
+}
+
+#fraction1, #fraction2 {
+    max-width: 80%;
+}
+
+.floatLeft {
+    float: left;
+}
+
+#fractionsCalcBtn {
+    margin-top: 20px;
 }

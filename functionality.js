@@ -786,8 +786,110 @@ function scribbleFunctionality() {
              FUNCTIONALITY FOR FRACTIONS
    =====================================================*/
 function fractionsFunctionality() {
-    print("called");
-}
+
+    var outputPara = document.getElementById("fractionOutput");
+    var calculateButton = document.getElementById("fractionsCalcBtn");
+    var operatorButtons = document.getElementsByClassName("fracBtn");
+    var selectedOperator, ansNumerator, ansDenominator, fracAnswer, temp;
+    
+    // Add selected class to operators
+    addSelectedClassWithEventListeners(operatorButtons);
+    
+    // Check which operator was selected
+    function checkOperators () {
+        for (var i = 0; i < operatorButtons.length; i++) {
+            if (operatorButtons[i].classList.contains("selected")) {
+                selectedOperator = operatorButtons[i].innerHTML;
+            }
+        }
+    }
+    
+    // Find the largest common factor of two numbers
+    function greatestFactor (a, b) {
+        for (var i = a; i > 0; i--) {
+            if (a % i == 0 && b % i == 0) {
+                return i;
+            }
+        } 
+    }
+    
+    //Simplifies a fraction
+    function simplifyFrac () {
+        temp = greatestFactor(ansNumerator, ansDenominator);
+        ansDenominator /= temp;
+        ansNumerator /= temp;
+    }
+    
+    // Adds or subtracts 2 fractions
+    function sumOrSubstractFunctions (num1, denom1, num2, denom2, addOrSubtract) {
+        ansDenominator = denom1 * denom2;
+        
+        if (addOrSubtract.toLowerCase() == "add") {
+            ansNumerator = (denom2 * num1) + (denom1 * num2);
+        } else if (addOrSubtract.toLowerCase() == "subtract") {
+            ansNumerator = (denom2 * num1) - (denom1 * num2);
+        } else {
+            alert("Error occured in summing or subtracting fraction");
+        }
+        
+        simplifyFrac();
+    }
+    
+    function calculateAnswer () {
+        var input1 = document.getElementById("fraction1").value;
+        var input2 = document.getElementById("fraction2").value;
+        
+        input1 = input1.split("/");
+        input2 = input2.split("/");
+        
+        // Validate input
+        if (input1[0] > 1000 || input1[1] > 1000 || input2[0] > 1000 || input2[1]) {
+            alert("Input contains a large fraction. Maybe factor some of the input and try again");
+            return;
+        }
+        
+        checkOperators();
+        
+        switch (selectedOperator) {
+            case "+":
+                sumOrSubstractFunctions(input1[0], input1[1], input2[0], input2[1], "add");
+                break;
+            case "-":
+                sumOrSubstractFunctions(input1[0], input1[1], input2[0], input2[1], "subtract");
+                break;
+            case "*":
+                ansNumerator = input1[0] * input1[0];
+                ansDenominator = input1[1] * input1[1];
+                simplifyFrac();
+                break;
+            case "/":
+                ansNumerator = input1[0] * input2[1];
+                ansDenominator = input1[1] * input2[0];
+                simplifyFrac();
+                break;
+            default:
+                alert("ERROR: PLEASE REFRESH");
+        }
+        
+        if (ansDenominator == ansNumerator) {
+            outputPara.innerHTML = "1";
+            return;
+        } else if (ansDenominator == 0) {
+            outputPara.innerHTML = "Invalid Input";
+            return;
+        } else if (ansNumerator % ansDenominator == 0) {
+            outputPara.innerHTML = (ansNumerator / ansDenominator).toString();
+            return;
+        }
+        else {
+            fracAnswer = ansNumerator.toString() + "&frasl;" + ansDenominator;
+            outputPara.innerHTML = fracAnswer;
+        }
+    }
+    
+    calculateButton.addEventListener("click", calculateAnswer);
+    
+} // End functionality for fractions
 
 
 /* =======================================================

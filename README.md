@@ -21,7 +21,7 @@ click and drag unwanted input to erase. Click pen to return
 to write capability.
 
 FRACTIONS: Input both fractions, chose an operation, click on
-calculate.
+calculate. No numerator or denominator can be above 1000.
 
 
 ### CALCULATOR
@@ -96,9 +96,11 @@ Ideas for future potential funtionality:
 
 No known bugs.
 
-Features currently in implementation:
+Ideas for future potential functionality:
 
-- Full functionality currently being implemented
+- If a decimal value is entered in the first textfield,
+    and the second field is blank, convert that into a 
+    fraction.
 
 
 ### FUTURE WIDGETS
@@ -113,7 +115,8 @@ Future upgrades could include include:
     squiggle on, draft etc.~~
     **Implemented 2/7/16**
 - A graphing tool for functions.
-- A calculator that performs operations on fractions.
+- ~~A calculator that performs operations on fractions.~~
+    **Implemented 11/7/16**
 - GoogleAds styled to match the webapp.
 - ~~Re-comment all function in javadoc-ish style.~~
     **Implemented 23/4/16**
