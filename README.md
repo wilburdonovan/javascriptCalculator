@@ -23,6 +23,8 @@ to write capability.
 FRACTIONS: Input both fractions, chose an operation, click on
 calculate. No numerator or denominator can be above 1000.
 
+INTEREST: In implementation
+
 
 ### CALCULATOR
 
@@ -102,6 +104,17 @@ Ideas for future potential functionality:
     and the second field is blank, convert that into a 
     fraction.
 
+
+### INTEREST
+
+Features currently in implementation:
+
+- Simple interest calculator
+- Compound interest calculator
+
+Ideas for future functionality:
+
+- Reverse calculate the interest rate from repayment
 
 ### FUTURE WIDGETS
 

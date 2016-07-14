@@ -22,6 +22,7 @@
                 <button class="menuButton BUTTON" id="menuFactors"> Factors </button>
                 <button class="menuButton BUTTON" id="menuBaseConversion"> Base Conversion </button>
                 <button class="menuButton BUTTON" id="menuFractions"> Fractions </button>
+                <button class="menuButton BUTTON" id="menuInterest"> Interest </button>
             </div>
             <!-- CALCULATOR DIV -->
             <div id="basicCalc" class="widgetDiv">
@@ -141,9 +142,22 @@
             </div>
             <div id="fractionOutputWrapper" class="floatLeft">
                 <span class="bold"> Answer:
-                    <p id="fractionOutput"></p>
+                    <p id="fractionOutput" class="largeText"></p>
                 </span>
             </div>
+            </div>
+            <!-- INTEREST DIV -->
+            <div id="interestCalc" class="widgetDiv notCalcDiv">
+                <div id="interestType">
+                    <button class="BUTTON floatLeft" value="simple"> Simple Interest </button>
+                    <button class="BUTTON floatLeft" value="compound"> Compound Interest </button>
+                </div>
+                <div id="simpleInterestDiv">
+                    <header class="widgetHeader"> Simple Interest </header>
+                </div>
+                <div id="compoundInterestDiv">
+                    <header class="widgetHeader"> Compound Interest </header>
+                </div>
             </div>
         </div>
     </div>

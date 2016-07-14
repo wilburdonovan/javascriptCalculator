@@ -843,7 +843,7 @@ function fractionsFunctionality() {
         input2 = input2.split("/");
         
         // Validate input
-        if (input1[0] > 1000 || input1[1] > 1000 || input2[0] > 1000 || input2[1]) {
+        if (input1[0] > 1000 || input1[1] > 1000 || input2[0] > 1000 || input2[1] > 1000) {
             alert("Input contains a large fraction. Maybe factor some of the input and try again");
             return;
         }
@@ -893,6 +893,40 @@ function fractionsFunctionality() {
 
 
 /* =======================================================
+             FUNCTIONALITY FOR INTEREST
+   =====================================================*/
+function interestFunctionality() {
+    var interestButtons = document.querySelectorAll("#interestType button");
+    var simpleInterestDiv = document.getElementById("simpleInterestDiv");
+    var compoundInterestDiv = document.getElementById("compoundInterestDiv");
+    
+    addSelectedClassWithEventListeners(interestButtons);
+    
+    function toggleInterestDivs () {
+        if (simpleInterestDiv.classList.contains("selected")) {
+            simpleInterestDiv.style.display = "none";
+            compoundInterestDiv.style.display = "block";
+            
+        } else {
+            simpleInterestDiv.style.display = "block";
+            compoundInterestDiv.style.display = "none";
+        }
+    }
+    
+    // Add event listeners to hide and show divs
+    for (var i = 0; i < interestButtons.length; i++) {
+        interestButtons[i].addEventListener("click", toggleInterestDivs);
+    }
+    
+    // Hide the compound interest div on initial load
+    compoundInterestDiv.style.display = "none";
+    
+    // Add selected classlist initially to simple interest button
+    interestButtons[0].classList.add("selected");
+}
+
+
+/* =======================================================
                 FUNCTIONALITY FOR MENU BAR
    =====================================================*/
 function menuFunctionality() {
@@ -901,6 +935,7 @@ function menuFunctionality() {
     var factorsCalc = document.getElementById("factorsCalc");
     var baseConversionCalc = document.getElementById("baseConversionCalc");
     var fractionsCalc = document.getElementById("fractionsCalc");
+    var interestCalc = document.getElementById("interestCalc");
     var menuButtons = document.getElementsByClassName("menuButton");
     
     // Add "selected" class to menu buttons when div is active
@@ -937,11 +972,18 @@ function menuFunctionality() {
         fractionsCalc.style.display = "block";
     }
     
+    // Hides all divs, show interest widget
+    function showInterest() {
+        hideAll();
+        interestCalc.style.display = "block";
+    }
+    
     // Attach functions to buttons
     document.getElementById("menuCalc").addEventListener("click", showBasicCalc);
     document.getElementById("menuFactors").addEventListener("click", showFactorsCalc);
     document.getElementById("menuBaseConversion").addEventListener("click", showBaseConversionCalc);
     document.getElementById("menuFractions").addEventListener("click", showFractions);
+    document.getElementById("menuInterest").addEventListener("click", showInterest);
 } //End functionality for menu bar
 
 
@@ -956,6 +998,7 @@ function main() {
     baseConversionFunctionality();
     scribbleFunctionality();
     fractionsFunctionality();
+    interestFunctionality();
 }
 
 // Call main onload

@@ -11,6 +11,7 @@ body {
 .notCalcDiv {
 	display: none;
     padding: 20px;
+    padding-top: 0px;
     text-align: right;
     width: 260px;
     margin: 10px 0px 15px 150px;
@@ -244,4 +245,13 @@ body {
 
 #fractionsCalcBtn {
     margin-top: 20px;
+}
+
+.largeText {
+	font-size: 40px;
+}
+
+#interestType button {
+	width: 50%;
+    font-size: 12px;
 }
