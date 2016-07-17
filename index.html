@@ -128,6 +128,7 @@
             </div>
             <!-- FRACTIONS DIV -->
             <div id="fractionsCalc" class="widgetDiv notCalcDiv">
+            <header class="widgetHeader"> Fractions </header>
             <p class="justifyPara"> Input two fractions, select operation, click calculate. </p>
             <div id="fractionInputWrapper" class="floatLeft">
                 <span class="bold">Fraction 1: </span><input type="text" id="fraction1" class="inputBox" />
@@ -151,12 +152,18 @@
                 <div id="interestType">
                     <button class="BUTTON floatLeft" value="simple"> Simple Interest </button>
                     <button class="BUTTON floatLeft" value="compound"> Compound Interest </button>
-                </div>
-                <div id="simpleInterestDiv">
+                </div><br><br>
+                <div id="simpleInterestDiv" class="interestBodyDiv">
                     <header class="widgetHeader"> Simple Interest </header>
+                    <p class="justifyPara">Input annual interest rate, input time (in years), input principle amount, click calculate.</p>
+                    <p class="leftText"><span class="bold">Rate:</span><span class="smallText"> the annual interest rate (%).</span><input type="text" class="inputBox" id="sInterestRate"/></p>
+                    <p class="leftText"><span class="bold">Time:</span><span class="smallText"> years to calculate interest.</span><input type="text" class="inputBox" id="sInterestTime"/></p>
+                    <p class="leftText"><span class="bold">Principal:</span><span class="smallText"> amount invested/ borrowed ($).</span><input type="text" class="inputBox" id="sInterestPrincipal"/></p>
+                    <button class="BUTTON" id="sInterestCalcBtn">Calculate</button>
+                    <p id="sInterestOutput" class="leftText noPadding"></p>
                 </div>
-                <div id="compoundInterestDiv">
-                    <header class="widgetHeader"> Compound Interest </header>
+                <div id="compoundInterestDiv" class="interestBodyDiv">
+                    <header class="widgetHeader" > Compound Interest </header>
                 </div>
             </div>
         </div>

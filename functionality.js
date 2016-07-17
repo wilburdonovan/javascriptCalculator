@@ -896,26 +896,70 @@ function fractionsFunctionality() {
              FUNCTIONALITY FOR INTEREST
    =====================================================*/
 function interestFunctionality() {
+    // Variables for interest widget as a whole
     var interestButtons = document.querySelectorAll("#interestType button");
     var simpleInterestDiv = document.getElementById("simpleInterestDiv");
     var compoundInterestDiv = document.getElementById("compoundInterestDiv");
+    var temp;
+    
+    // Variables for simple interest functionality
+    var sInterestCalcBtn = document.getElementById("sInterestCalcBtn");
+    var sInterestOutput = document.getElementById("sInterestOutput");
+    var sTotalInterest, sInterestPerMonth, sInterestPerWeek, sInterestPerYear;
+    var sTotalRepayment, sRepaymentPerMonth, sRepaymentPerWeek, sRepaymentPerYear;
+    var sInterestOutputString = "";
+    
+    // Function that calculates simple interest
+    function calcSimpleInterest () {
+        // Get Input and store in variables
+        var sInterestRate = document.getElementById("sInterestRate").value;
+        var sInterestTime = parseInt(document.getElementById("sInterestTime").value);
+        var sInterestPrincipal = parseInt(document.getElementById("sInterestPrincipal").value);
+        // Make calculations
+        temp = parseFloat(sInterestRate) / 100;
+        sTotalInterest = sInterestPrincipal * temp * sInterestTime;
+        sInterestPerYear = sTotalInterest / sInterestTime;
+        sInterestPerMonth = sInterestPerYear / 12;
+        sInterestPerWeek = sInterestPerYear / 52;
+        sTotalRepayment = sTotalInterest + sInterestPrincipal;
+        sRepaymentPerYear = sTotalRepayment / sInterestTime;
+        sRepaymentPerMonth = sRepaymentPerYear / 12;
+        sRepaymentPerWeek = sRepaymentPerYear / 52;
+        // Build the output string
+        sInterestOutputString += "<ul class='noBullets noPadding'><li class='bold'>The total interest you will pay back is: $" + sTotalInterest.toFixed(2) + "</li>";
+        sInterestOutputString += "<li>Yearly interest: $" + sInterestPerYear.toFixed(2) + "</li>";
+        sInterestOutputString += "<li>Monthly interest: $" + sInterestPerMonth.toFixed(2) + "</li>";
+        sInterestOutputString += "<li>Weekly interest: $" + sInterestPerWeek.toFixed(2) + "</li>";
+        sInterestOutputString += "<li>------------------------------------</li>"
+        sInterestOutputString += "<li class='bold'>Total repayable: $" + sTotalRepayment.toFixed(2) + "<li>";
+        sInterestOutputString += "<li>Yearly repayment: $" + sRepaymentPerYear.toFixed(2) + "</li>";
+        sInterestOutputString += "<li>Monthly repayment: $" + sRepaymentPerMonth.toFixed(2) + "</li>";
+        sInterestOutputString += "<li>Weekly repayment: $" + sRepaymentPerWeek.toFixed(2) + "</li></ul>";
+        // Display output string on output para
+        sInterestOutput.innerHTML = sInterestOutputString;
+        // Reset output string
+        sInterestOutputString = "";
+    }
+    
     
     addSelectedClassWithEventListeners(interestButtons);
     
-    function toggleInterestDivs () {
-        if (simpleInterestDiv.classList.contains("selected")) {
-            simpleInterestDiv.style.display = "none";
-            compoundInterestDiv.style.display = "block";
-            
-        } else {
-            simpleInterestDiv.style.display = "block";
-            compoundInterestDiv.style.display = "none";
-        }
-    }
+    // Add event listener to simple interest calculate button
+    sInterestCalcBtn.addEventListener("click", calcSimpleInterest);
     
     // Add event listeners to hide and show divs
     for (var i = 0; i < interestButtons.length; i++) {
-        interestButtons[i].addEventListener("click", toggleInterestDivs);
+        interestButtons[i].addEventListener("click", function (event) {
+            if (event.target.value == "simple") {
+                simpleInterestDiv.style.display = "block";
+                compoundInterestDiv.style.display = "none";
+            } else if (event.target.value == "compound") {
+                simpleInterestDiv.style.display = "none";
+                compoundInterestDiv.style.display = "block";
+            } else {
+                alert("Something went wrong. Please refresh and try again.");
+            }
+        }); 
     }
     
     // Hide the compound interest div on initial load
