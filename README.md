@@ -115,6 +115,7 @@ Features currently in implementation:
 Ideas for future functionality:
 
 - Reverse calculate the interest rate from repayment
+- Reverse calculate the principal from future value
 
 ### FUTURE WIDGETS
 

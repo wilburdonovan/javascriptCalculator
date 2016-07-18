@@ -164,6 +164,21 @@
                 </div>
                 <div id="compoundInterestDiv" class="interestBodyDiv">
                     <header class="widgetHeader" > Compound Interest </header>
+                    <p class="justifyPara">Input interest rate, compounding period, number of compounding periods, input principle amount, click calculate.</p>
+                    <p class="leftText"><span class="bold">Rate:</span><span class="smallText"> the annual interest rate (%).</span><input type="text" class="inputBox" id="cInterestRate"/></p>
+                    <p class="leftText" id="compoundingPeriod"><span class="bold">Compounding Period:</span><br>
+                        <button class="BUTTON smallText selected" value="yearly">Yearly</button>
+                        <button class="BUTTON smallText" value="monthly">Monthly</button>
+                    </p>
+                    <p class="leftText"><span class="bold">No. of compounding periods:</span>
+                        <input type="text" class="inputBox" id="cInterestTime"/>
+                    </p>
+                    <p class="leftText">
+                        <span class="bold">Principal:</span><span class="smallText"> amount invested/ borrowed ($).</span>
+                        <input type="text" class="inputBox" id="cInterestPrincipal"/>
+                    </p>
+                    <button class="BUTTON" id="cInterestCalcBtn">Calculate</button>
+                    <p id="cInterestOutput" class="leftText noPadding"></p>
                 </div>
             </div>
         </div>

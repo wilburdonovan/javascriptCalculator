@@ -900,14 +900,22 @@ function interestFunctionality() {
     var interestButtons = document.querySelectorAll("#interestType button");
     var simpleInterestDiv = document.getElementById("simpleInterestDiv");
     var compoundInterestDiv = document.getElementById("compoundInterestDiv");
+    var compoundingPeriodBtns = document.querySelectorAll("#compoundingPeriod .BUTTON");
     var temp;
     
     // Variables for simple interest functionality
     var sInterestCalcBtn = document.getElementById("sInterestCalcBtn");
     var sInterestOutput = document.getElementById("sInterestOutput");
-    var sTotalInterest, sInterestPerMonth, sInterestPerWeek, sInterestPerYear;
+    var sTotalInterest;
     var sTotalRepayment, sRepaymentPerMonth, sRepaymentPerWeek, sRepaymentPerYear;
     var sInterestOutputString = "";
+    
+    // Variables for compound interest functionality
+    var cInterestCalcBtn = document.getElementById("cInterestCalcBtn");
+    var cInterestOutput = document.getElementById("cInterestOutput");
+    var cTotalInterest;
+    var cTotalRepayment, cRepaymentPerMonth, cRepaymentPerWeek, cRepaymentPerYear;
+    var cInterestOutputString = "";
     
     // Function that calculates simple interest
     function calcSimpleInterest () {
@@ -918,19 +926,13 @@ function interestFunctionality() {
         // Make calculations
         temp = parseFloat(sInterestRate) / 100;
         sTotalInterest = sInterestPrincipal * temp * sInterestTime;
-        sInterestPerYear = sTotalInterest / sInterestTime;
-        sInterestPerMonth = sInterestPerYear / 12;
-        sInterestPerWeek = sInterestPerYear / 52;
         sTotalRepayment = sTotalInterest + sInterestPrincipal;
         sRepaymentPerYear = sTotalRepayment / sInterestTime;
         sRepaymentPerMonth = sRepaymentPerYear / 12;
         sRepaymentPerWeek = sRepaymentPerYear / 52;
         // Build the output string
         sInterestOutputString += "<ul class='noBullets noPadding'><li class='bold'>The total interest you will pay back is: $" + sTotalInterest.toFixed(2) + "</li>";
-        sInterestOutputString += "<li>Yearly interest: $" + sInterestPerYear.toFixed(2) + "</li>";
-        sInterestOutputString += "<li>Monthly interest: $" + sInterestPerMonth.toFixed(2) + "</li>";
-        sInterestOutputString += "<li>Weekly interest: $" + sInterestPerWeek.toFixed(2) + "</li>";
-        sInterestOutputString += "<li>------------------------------------</li>"
+        sInterestOutputString += "<li>-----------------------------------------</li>";
         sInterestOutputString += "<li class='bold'>Total repayable: $" + sTotalRepayment.toFixed(2) + "<li>";
         sInterestOutputString += "<li>Yearly repayment: $" + sRepaymentPerYear.toFixed(2) + "</li>";
         sInterestOutputString += "<li>Monthly repayment: $" + sRepaymentPerMonth.toFixed(2) + "</li>";
@@ -942,10 +944,54 @@ function interestFunctionality() {
     }
     
     
-    addSelectedClassWithEventListeners(interestButtons);
+    // Function that calculates compound interest
+    function calcCompoundInterest () {
+        // Get input and store in variables
+        var cInterestRate = parseFloat(document.getElementById("cInterestRate").value);
+        var cInterestTime = parseInt(document.getElementById("cInterestTime").value);
+        var cInterestPrincipal = parseInt(document.getElementById("cInterestPrincipal").value);
+        var compoundingPeriod;
+        // Get the compounding period
+        for (let button of compoundingPeriodBtns) {
+            if (button.classList.contains("selected")){
+               compoundingPeriod = button.value; 
+            }
+        }
+        // Set interest rate
+        if (compoundingPeriod == "monthly") {
+            temp = cInterestRate / 1200;
+        } else {
+            temp = cInterestRate / 100;
+        }
+        temp += 1;
+        // Make calculation
+        cTotalRepayment = cInterestPrincipal * Math.pow(temp, cInterestTime);
+        cTotalInterest = cTotalRepayment - cInterestPrincipal;
+        if (compoundingPeriod == "monthly"){
+            cRepaymentPerYear = cTotalRepayment / (cInterestTime/12);
+        } else {
+            cRepaymentPerYear = cTotalRepayment / cInterestTime;
+        }
+        cRepaymentPerMonth = cRepaymentPerYear / 12;
+        cRepaymentPerWeek = cRepaymentPerYear / 52;
+        // Build output string
+        cInterestOutputString += "<ul class='noBullets noPadding'><li class='bold'>The total interest you will pay back is: $" + cTotalInterest.toFixed(2) + "</li>";
+        cInterestOutputString += "<li>-----------------------------------------</li>";
+        cInterestOutputString += "<li class='bold'>Total repayable: $" + cTotalRepayment.toFixed(2) + "<li>";
+        cInterestOutputString += "<li>Yearly repayment: $" + cRepaymentPerYear.toFixed(2) + "</li>";
+        cInterestOutputString += "<li>Monthly repayment: $" + cRepaymentPerMonth.toFixed(2) + "</li>";
+        cInterestOutputString += "<li>Weekly repayment: $" + cRepaymentPerWeek.toFixed(2) + "</li></ul>";
+        // Attach output string to output div
+        cInterestOutput.innerHTML = cInterestOutputString;
+    }
     
-    // Add event listener to simple interest calculate button
+    // Add selected class to relevant groups of buttons on toggle
+    addSelectedClassWithEventListeners(interestButtons);
+    addSelectedClassWithEventListeners(compoundingPeriodBtns);
+    
+    // Add event listeners to relevant functions to run on calculate
     sInterestCalcBtn.addEventListener("click", calcSimpleInterest);
+    cInterestCalcBtn.addEventListener("click", calcCompoundInterest);
     
     // Add event listeners to hide and show divs
     for (var i = 0; i < interestButtons.length; i++) {
