@@ -23,7 +23,10 @@ to write capability.
 FRACTIONS: Input both fractions, chose an operation, click on
 calculate. No numerator or denominator can be above 1000.
 
-INTEREST: In implementation
+INTEREST: 
+1. Select simple or compound interest from top of widget
+2. Input requested details
+3. Click calculate
 
 
 ### CALCULATOR
@@ -107,10 +110,7 @@ Ideas for future potential functionality:
 
 ### INTEREST
 
-Features currently in implementation:
-
-- Simple interest calculator
-- Compound interest calculator
+No known bugs.
 
 Ideas for future functionality:
 

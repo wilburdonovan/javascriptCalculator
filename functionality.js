@@ -790,7 +790,7 @@ function fractionsFunctionality() {
     var outputPara = document.getElementById("fractionOutput");
     var calculateButton = document.getElementById("fractionsCalcBtn");
     var operatorButtons = document.getElementsByClassName("fracBtn");
-    var selectedOperator, ansNumerator, ansDenominator, fracAnswer, temp;
+    var selectedOperator, ansNumerator, ansDenominator, fracAnswer, temp, isNegative = false;
     
     // Add selected class to operators
     addSelectedClassWithEventListeners(operatorButtons);
@@ -821,15 +821,31 @@ function fractionsFunctionality() {
     }
     
     // Adds or subtracts 2 fractions
-    function sumOrSubstractFunctions (num1, denom1, num2, denom2, addOrSubtract) {
+    function calculateFractionsAnswer (num1, denom1, num2, denom2, operation) {
         ansDenominator = denom1 * denom2;
         
-        if (addOrSubtract.toLowerCase() == "add") {
+        if (operation.toLowerCase() == "add") {
             ansNumerator = (denom2 * num1) + (denom1 * num2);
-        } else if (addOrSubtract.toLowerCase() == "subtract") {
+        } else if (operation.toLowerCase() == "subtract") {
             ansNumerator = (denom2 * num1) - (denom1 * num2);
+        } else if (operation.toLowerCase() == "multiply") {
+            ansNumerator = num1 * num2;
+        } else if (operation.toLowerCase() == "divide") {
+            ansDenominator = num2 * denom1;
+            ansNumerator = num1 * denom2;
         } else {
-            alert("Error occured in summing or subtracting fraction");
+            alert("Error occured in calculating fraction");
+        }
+        
+        // Logic if numerator or denominator for answer is negative
+        if (ansDenominator < 0 || ansNumerator < 0) {
+            if (ansDenominator < 0) {
+                ansDenominator *= -1;
+            }
+            if (ansNumerator < 0) {
+                ansNumerator *= -1;
+            }
+            isNegative = true;
         }
         
         simplifyFrac();
@@ -852,20 +868,16 @@ function fractionsFunctionality() {
         
         switch (selectedOperator) {
             case "+":
-                sumOrSubstractFunctions(input1[0], input1[1], input2[0], input2[1], "add");
+                calculateFractionsAnswer(input1[0], input1[1], input2[0], input2[1], "add");
                 break;
             case "-":
-                sumOrSubstractFunctions(input1[0], input1[1], input2[0], input2[1], "subtract");
+                calculateFractionsAnswer(input1[0], input1[1], input2[0], input2[1], "subtract");
                 break;
             case "*":
-                ansNumerator = input1[0] * input1[0];
-                ansDenominator = input1[1] * input1[1];
-                simplifyFrac();
+                calculateFractionsAnswer(input1[0], input1[1], input2[0], input2[1], "multiply");
                 break;
             case "/":
-                ansNumerator = input1[0] * input2[1];
-                ansDenominator = input1[1] * input2[0];
-                simplifyFrac();
+                calculateFractionsAnswer(input1[0], input1[1], input2[0], input2[1], "divide");
                 break;
             default:
                 alert("ERROR: PLEASE REFRESH");
@@ -881,8 +893,14 @@ function fractionsFunctionality() {
             outputPara.innerHTML = (ansNumerator / ansDenominator).toString();
             return;
         }
-        else {
-            fracAnswer = ansNumerator.toString() + "&frasl;" + ansDenominator;
+        else { // Add a negative sign if answer is negative
+            if (isNegative) {
+                fracAnswer = "-";
+                isNegative = false;
+            } else {
+                fracAnswer = "";
+            }
+            fracAnswer += ansNumerator.toString() + "&frasl;" + ansDenominator;
             outputPara.innerHTML = fracAnswer;
         }
     }
@@ -923,6 +941,17 @@ function interestFunctionality() {
         var sInterestRate = document.getElementById("sInterestRate").value;
         var sInterestTime = parseInt(document.getElementById("sInterestTime").value);
         var sInterestPrincipal = parseInt(document.getElementById("sInterestPrincipal").value);
+        // Validate input
+        if (isNaN(sInterestRate) || isNaN(sInterestTime) || isNaN(sInterestPrincipal)) {
+            alert("One or more fields are blank OR invalid input. Please try again.");
+            return;
+        }
+        if (sInterestPrincipal < 1 || sInterestRate <= 0 || sInterestTime <= 0) {
+            alert("One of your values is 0 or negative. Please retry.");
+            return;
+        }
+        // Reset output string
+        sInterestOutputString = "";
         // Make calculations
         temp = parseFloat(sInterestRate) / 100;
         sTotalInterest = sInterestPrincipal * temp * sInterestTime;
@@ -951,6 +980,17 @@ function interestFunctionality() {
         var cInterestTime = parseInt(document.getElementById("cInterestTime").value);
         var cInterestPrincipal = parseInt(document.getElementById("cInterestPrincipal").value);
         var compoundingPeriod;
+        // Validate input
+        if (isNaN(cInterestRate) || isNaN(cInterestTime) || isNaN(cInterestPrincipal)) {
+            alert("One or more fields are blank OR invalid input. Please try again.");
+            return;
+        }
+        if (cInterestPrincipal < 1 || cInterestRate <= 0 || cInterestTime <= 0) {
+            alert("One of your values is 0 or negative. Please retry.");
+            return;
+        }
+        // Reset output string
+        cInterestOutputString = "";
         // Get the compounding period
         for (let button of compoundingPeriodBtns) {
             if (button.classList.contains("selected")){
