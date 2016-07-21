@@ -96,7 +96,7 @@ body {
 
 .menuButton {
     width: 100px;
-    font-size: 15px;
+    font-size: 13px !important;
     border-radius: 0px;
     margin: auto;
     margin-bottom: 5px;
@@ -264,6 +264,48 @@ body {
     text-align: right;
 }
 
+.centerText {
+    text-align: center;
+}
+
 .smallText {
     font-size: 12px;
+}
+
+.mediumText {
+    font-size: 15px !important;
+}
+
+.sansSerif {
+    font-family: sans-serif;
+}
+
+#scribbleTools, #scribbleTools .BUTTON {
+	font-size: 15px;
+}
+
+.trigSection {
+	border: solid 1px #00bfff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.trigSection p {
+	margin: 0px;
+    margin-bottom: 15px;
+}
+
+.trigSection .inputBox {
+	display: inline;
+    max-width: 100%;
+    width: 60%
+}
+
+.noMarginBottom {
+    margin-bottom: 0px !important;
+}
+
+.noMarginTop {
+    margin-top: 0px !important;
 }

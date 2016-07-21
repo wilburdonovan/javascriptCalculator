@@ -18,11 +18,12 @@
         <div id="wrapper" class="clearFix">
             <!-- MENU -->
             <div id="menu">
-                <button class="menuButton BUTTON" id="menuCalc"> Basic Calculator</button>
+                <button class="menuButton BUTTON selected" id="menuCalc"> Basic Calculator</button>
                 <button class="menuButton BUTTON" id="menuFactors"> Factors </button>
                 <button class="menuButton BUTTON" id="menuBaseConversion"> Base Conversion </button>
                 <button class="menuButton BUTTON" id="menuFractions"> Fractions </button>
                 <button class="menuButton BUTTON" id="menuInterest"> Interest </button>
+                <button class="menuButton BUTTON" id="menuTrigonometry"> Trigonometry </button>
             </div>
             <!-- CALCULATOR DIV -->
             <div id="basicCalc" class="widgetDiv">
@@ -115,15 +116,16 @@
                 </canvas>
                 <div id="scribbleTools">
                     <button id="clearCanvas" class="BUTTON">Clear</button>
-                    Pen Color:<select id="colorSelector" name="colors">
-                        <option value="black">Black</option>
-                        <option value="blue">Blue</option>
-                        <option value="red">Red</option>
-                        <option value="green">Green</option>
-                        <option value="yellow">Yellow</option>
-                        <option value="purple">Purple</option>
-                        <option value="pink">Pink</option>
-                    </select>
+                    <span class="sansSerif"> Pen Color:<select id="colorSelector" name="colors">
+                            <option value="black">Black</option>
+                            <option value="blue">Blue</option>
+                            <option value="red">Red</option>
+                            <option value="green">Green</option>
+                            <option value="yellow">Yellow</option>
+                            <option value="purple">Purple</option>
+                            <option value="pink">Pink</option>
+                        </select>
+                    </span>
                 </div>
             </div>
             <!-- FRACTIONS DIV -->
@@ -179,6 +181,23 @@
                     </p>
                     <button class="BUTTON" id="cInterestCalcBtn">Calculate</button>
                     <p id="cInterestOutput" class="leftText noPadding"></p>
+                </div>
+            </div>
+            <!-- TRIGONOMETRY -->
+            <div id="trigonometryCalc" class="widgetDiv notCalcDiv">
+                <header class="widgetHeader"> Trigonometry </header>
+                <p class="justifyPara"> Please select an option from the menu below.</p>
+                <div class="centerText">
+                    <button class="BUTTON mediumText"> Deg/Rad Conversion </button>
+                    <div id="degRadConvert" class="trigSection">
+                        <p class="justifyPara"> Please enter either radians or degrees and press calculate to convert to the other.  </p>
+                        <p class="rightText noMarginBottom"> Degrees: <input id="degreesInput" class="inputBox"/> </p>
+                        <p class="rightText noMarginTop"> Radians: <input id="radiansInput" class="inputBox"/> </p>
+                        <p class="rightText">
+                            <button class="BUTTON"> Done </button>
+                            <button class="BUTTON"> Calculate </button>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

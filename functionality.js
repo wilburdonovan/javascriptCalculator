@@ -1057,6 +1057,14 @@ function interestFunctionality() {
 
 
 /* =======================================================
+           FUNCTIONALITY FOR TRIGONOMETRY
+   =====================================================*/
+function trigonometryFunctionality() {
+    print("hello");
+}
+
+
+/* =======================================================
                 FUNCTIONALITY FOR MENU BAR
    =====================================================*/
 function menuFunctionality() {
@@ -1066,6 +1074,7 @@ function menuFunctionality() {
     var baseConversionCalc = document.getElementById("baseConversionCalc");
     var fractionsCalc = document.getElementById("fractionsCalc");
     var interestCalc = document.getElementById("interestCalc");
+    var trigonometryCalc = document.getElementById("trigonometryCalc");
     var menuButtons = document.getElementsByClassName("menuButton");
     
     // Add "selected" class to menu buttons when div is active
@@ -1108,12 +1117,19 @@ function menuFunctionality() {
         interestCalc.style.display = "block";
     }
     
+    // Hides all divs, show trigonometry widget
+    function showTrigonometry() {
+        hideAll();
+        trigonometryCalc.style.display = "block";
+    }
+    
     // Attach functions to buttons
     document.getElementById("menuCalc").addEventListener("click", showBasicCalc);
     document.getElementById("menuFactors").addEventListener("click", showFactorsCalc);
     document.getElementById("menuBaseConversion").addEventListener("click", showBaseConversionCalc);
     document.getElementById("menuFractions").addEventListener("click", showFractions);
     document.getElementById("menuInterest").addEventListener("click", showInterest);
+    document.getElementById("menuTrigonometry").addEventListener("click", showTrigonometry);
 } //End functionality for menu bar
 
 
@@ -1129,6 +1145,7 @@ function main() {
     scribbleFunctionality();
     fractionsFunctionality();
     interestFunctionality();
+    trigonometryFunctionality();
 }
 
 // Call main onload

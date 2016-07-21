@@ -117,6 +117,15 @@ Ideas for future functionality:
 - Reverse calculate the interest rate from repayment
 - Reverse calculate the principal from future value
 
+
+### TRIGONOMETRY
+
+Currently in implementation:
+
+- Basic div structure
+- Radians to degrees converter sliding div menu
+- Sin/Cos/Tan sliding div menu
+
 ### FUTURE WIDGETS
 
 Future upgrades could include include:
