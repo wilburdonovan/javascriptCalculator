@@ -1060,8 +1060,59 @@ function interestFunctionality() {
            FUNCTIONALITY FOR TRIGONOMETRY
    =====================================================*/
 function trigonometryFunctionality() {
-    print("hello");
-}
+    //Necessary Variables
+    var trigBtns = document.querySelectorAll(".trigBtn");
+    var doneBtns = document.querySelectorAll(".doneBtn");
+    var trigSections = document.querySelectorAll(".trigSection");
+    
+    // Hide all trigSections
+    function hideTrigSections () {
+        for (let section of trigSections) {
+            section.style.display = "none";
+        }
+    }
+    
+    // Displays the correct trigSection when trigBtn is clicked
+    function showRelevantSection () {
+        var selected;
+        // find the selected button
+        for (let btn of trigBtns) {
+            if (btn.classList.contains("selected")) {
+                selected = btn;
+            }
+        }
+        // hide all the trigSections
+        hideTrigSections();
+        // find the relevant div and display
+        switch (selected.innerHTML) {
+            case "Deg/Rad Conversion":
+                document.getElementById("degRadConvert").style.display = "block";
+                break;
+            default:
+                alert("Something went wrong. Please try again.");
+                return;
+        } 
+    }
+    
+    // Initial call to hide all the trigSections
+    hideTrigSections();
+    
+    // Make all the doneBtns hide all the trigSections
+    for (let btn of doneBtns) {
+        btn.addEventListener("click", hideTrigSections);
+        btn.addEventListener("click", function () {
+           removeSelectedClass(trigBtns); 
+        });
+    }
+    
+    addSelectedClassWithEventListeners(trigBtns); 
+    
+    // Attach showRelevantSection to all the trigBtns
+    for (let btn of trigBtns) {
+        btn.addEventListener("click", showRelevantSection);
+    }
+    
+} // End functionality for trigonometry
 
 
 /* =======================================================

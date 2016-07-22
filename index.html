@@ -188,15 +188,17 @@
                 <header class="widgetHeader"> Trigonometry </header>
                 <p class="justifyPara"> Please select an option from the menu below.</p>
                 <div class="centerText">
-                    <button class="BUTTON mediumText"> Deg/Rad Conversion </button>
+                    <button class="BUTTON mediumText trigBtn">Deg/Rad Conversion</button>
                     <div id="degRadConvert" class="trigSection">
+                        <header class="smallHeading marginBottom10">Degrees / Radians Conversion</header>
                         <p class="justifyPara"> Please enter either radians or degrees and press calculate to convert to the other.  </p>
                         <p class="rightText noMarginBottom"> Degrees: <input id="degreesInput" class="inputBox"/> </p>
                         <p class="rightText noMarginTop"> Radians: <input id="radiansInput" class="inputBox"/> </p>
                         <p class="rightText">
-                            <button class="BUTTON"> Done </button>
+                            <button class="BUTTON doneBtn"> Done </button>
                             <button class="BUTTON"> Calculate </button>
                         </p>
+                        <p id="degRadConvertOutput"></p>
                     </div>
                 </div>
             </div>
