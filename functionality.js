@@ -1053,7 +1053,7 @@ function interestFunctionality() {
     
     // Add selected classlist initially to simple interest button
     interestButtons[0].classList.add("selected");
-}
+} // End functionality for interest
 
 
 /* =======================================================
@@ -1064,6 +1064,7 @@ function trigonometryFunctionality() {
     var trigBtns = document.querySelectorAll(".trigBtn");
     var doneBtns = document.querySelectorAll(".doneBtn");
     var trigSections = document.querySelectorAll(".trigSection");
+    var calcDegRadConvert = document.getElementById("calcDegRadConvert");
     
     // Hide all trigSections
     function hideTrigSections () {
@@ -1111,6 +1112,49 @@ function trigonometryFunctionality() {
     for (let btn of trigBtns) {
         btn.addEventListener("click", showRelevantSection);
     }
+    
+    // Function to convert between degrees and radians
+    function convertBetweenRadiansDegrees (val, radOrDeg) {
+        var answer;
+        if (radOrDeg == "radians") {
+            answer = val * 180 / Math.PI;
+        }
+        if (radOrDeg == "degrees") {
+            answer = val * Math.PI / 180;
+        }
+        print(val + " " + radOrDeg + " " + answer);
+        return answer;
+    }
+    
+    // Function to calculate degrees to radians
+    function solveRadDegConvert () {
+        var inputDeg = parseFloat(document.getElementById("degreesInput").value);
+        var inputRad = parseFloat(document.getElementById("radiansInput").value);
+        var outputStr = "";
+        var degRadConvertOutput = document.getElementById("degRadConvertOutput");
+        // Make sure only one field has input
+        if (!isNaN(inputDeg) && !isNaN(inputRad)) {
+            alert("Please only enter 1 value- either radians or degrees");
+            return;
+        }
+        // Check what unit the user wants converted
+        if (isNaN(inputDeg)) {
+            outputStr += inputRad + " radians is equal to " + convertBetweenRadiansDegrees(inputRad, "radians").toFixed(5) + " degrees.";
+        }
+        if (isNaN(inputRad)) {
+            var temp = convertBetweenRadiansDegrees(inputDeg, "degrees") / Math.PI;
+            outputStr += inputDeg + " degrees is equal to " + convertBetweenRadiansDegrees(inputDeg, "degrees").toFixed(5) + " radians or ";
+            outputStr += temp.toFixed(2) + "&Pi; radians."
+        }
+        // Append output string to the answer div
+        degRadConvertOutput.innerHTML = outputStr;
+        // Reset values in input boxes
+        document.getElementById("degreesInput").value = null;
+        document.getElementById("radiansInput").value = null;
+    }
+    
+    // Attach necessary functions to relevant event listeners
+    calcDegRadConvert.addEventListener("click", solveRadDegConvert);
     
 } // End functionality for trigonometry
 
