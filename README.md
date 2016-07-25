@@ -122,9 +122,11 @@ Ideas for future functionality:
 
 Currently in implementation:
 
-- Basic div structure
-- Radians to degrees converter sliding div menu
 - Sin/Cos/Tan sliding div menu
+
+Ideas for future functionality:
+
+- Let the buttons toggle the divs off as well as on
 
 ### FUTURE WIDGETS
 
@@ -144,5 +146,6 @@ Future upgrades could include include:
 - ~~Re-comment all function in javadoc-ish style.~~
     **Implemented 23/4/16**
 - ~~Update READMe to include basic user guide.~~
+- Make the app more responsive for bigger screens, maybe a viewport for 1080p?
   
   

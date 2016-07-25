@@ -1065,6 +1065,8 @@ function trigonometryFunctionality() {
     var doneBtns = document.querySelectorAll(".doneBtn");
     var trigSections = document.querySelectorAll(".trigSection");
     var calcDegRadConvert = document.getElementById("calcDegRadConvert");
+    var sinCosTanCalc = document.getElementById("sinCosTanCalc");
+    var sinCosTanBtns = document.querySelectorAll(".sinCosTanBtn");
     
     // Hide all trigSections
     function hideTrigSections () {
@@ -1089,6 +1091,9 @@ function trigonometryFunctionality() {
             case "Deg/Rad Conversion":
                 document.getElementById("degRadConvert").style.display = "block";
                 break;
+            case "Sin/Cos/Tan":
+                document.getElementById("sinCosTan").style.display = "block";
+                break;
             default:
                 alert("Something went wrong. Please try again.");
                 return;
@@ -1106,7 +1111,8 @@ function trigonometryFunctionality() {
         });
     }
     
-    addSelectedClassWithEventListeners(trigBtns); 
+    addSelectedClassWithEventListeners(trigBtns);
+    addSelectedClassWithEventListeners(sinCosTanBtns);
     
     // Attach showRelevantSection to all the trigBtns
     for (let btn of trigBtns) {
@@ -1123,6 +1129,23 @@ function trigonometryFunctionality() {
             answer = val * Math.PI / 180;
         }
         print(val + " " + radOrDeg + " " + answer);
+        return answer;
+    }
+    
+    // Function to solve sin cos tan problems
+    function calcSinCosTan (angle, operation) {
+        var answer;
+        if (operation.toLowerCase() == "sin") {
+            answer = Math.sin(angle);
+        } else if (operation.toLowerCase() == "cos") {
+            answer = Math.cos(angle);
+        } else if (operation.toLowerCase() == "tan") {
+            answer = Math.tan(angle);
+        } else {
+            alert("Something went wrong. Please try again.");
+            return;
+        }
+        
         return answer;
     }
     
@@ -1153,8 +1176,38 @@ function trigonometryFunctionality() {
         document.getElementById("radiansInput").value = null;
     }
     
+    // Function to calculate sin/cos/tan answer
+    function solveSinCosTan () {
+        var inputAngle = document.getElementById("angleInput").value;
+        var sinCosTanOutput = document.getElementById("sinCosTanOutput");
+        var outputStr = "";
+        var operation;
+        // Find out what operation to perform
+        for (let btn of sinCosTanBtns) {
+            if (btn.classList.contains("selected")) {
+                operation = btn.innerHTML;
+            }
+        }
+        // Validate angle
+        if (typeof inputAngle == "string") {
+            inputAngle = parseFloat(inputAngle);
+        } else {
+            alert("Something went wrong. Please refresh and retry.");
+            return;
+        }
+        if (typeof inputAngle != "number") {
+            alert("Something went wrong. Please refresh and retry.");
+            return;
+        }
+        // Build output string
+        outputStr += "The " + operation.toLowerCase() + " of " + inputAngle + " is <strong>" + calcSinCosTan(inputAngle, operation) + "</strong>.";
+        // Put output string in output para
+        sinCosTanOutput.innerHTML = outputStr;
+    }
+    
     // Attach necessary functions to relevant event listeners
     calcDegRadConvert.addEventListener("click", solveRadDegConvert);
+    sinCosTanCalc.addEventListener("click", solveSinCosTan);
     
 } // End functionality for trigonometry
 
